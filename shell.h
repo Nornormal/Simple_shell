@@ -61,27 +61,27 @@ typedef struct alias_s
 alias_t *aliases;
 
 /* Main Helpers */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char **_strtok(char *line, char *delim);
+ssize_t _getline(char **lpnt, size_t *n, FILE *r_stream);
+void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size);
+char **_strtok(char *lne, char *delim);
 char *get_location(char *command);
 list_t *get_path_dir(char *path);
-int execute(char **args, char **front);
+int execute(char **ag, char **front);
 void free_list(list_t *head);
 char *_itoa(int num);
 
 /* Input Helpers */
-void handle_line(char **line, ssize_t read);
-ssize_t get_new_len(char *line);
-void logical_ops(char *line, ssize_t *new_len);
-void variable_replacement(char **args, int *exe_ret);
-char *get_args(char *line, int *exe_ret);
-int call_args(char **args, char **front, int *exe_ret);
-int run_args(char **args, char **front, int *exe_ret);
-int handle_args(int *exe_ret);
-int check_args(char **args);
+void handle_line(char **lne, ssize_t rread);
+ssize_t get_new_len(char *lne);
+void logical_ops(char *lne, ssize_t *n_len);
+void variable_replacement(char **ag, int *exe_retn);
+char *get_args(char *lne, int *exe_retn);
+int call_args(char **ag, char **front, int *exe_retn);
+int run_args(char **ag, char **front, int *exe_retn);
+int handle_args(int *exe_retn);
+int check_args(char **ag);
 void free_args(char **args, char **front);
-char **replace_aliases(char **args);
+char **replace_aliases(char **ag);
 
 /* String functions */
 int _strlen(const char *s);
@@ -94,19 +94,19 @@ int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* Builtins */
-int (*get_builtin(char *command))(char **args, char **front);
-int shellby_exit(char **args, char **front);
-int shellby_env(char **args, char __attribute__((__unused__)) **front);
-int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_cd(char **args, char __attribute__((__unused__)) **front);
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
+int (*get_builtin(char *command))(char **ag, char **frnt);
+int shell_cmd_exit(char **args, char **front);
+int shell_cmd_env(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_setenv(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_unsetenv(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_cd(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_alias(char **args, char __attribute__((__unused__)) **front);
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
-int shellby_help(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_help(char **args, char __attribute__((__unused__)) **front);
 
 /* Builtin Helpers */
-char **_copyenv(void);
+char **_cpenv(void);
 void free_env(void);
 char **_getenv(const char *var);
 
@@ -126,15 +126,15 @@ void free_alias_list(alias_t *head);
 list_t *add_node_end(list_t **head, char *dir);
 void free_list(list_t *head);
 
-void help_all(void);
-void help_alias(void);
-void help_cd(void);
-void help_exit(void);
-void help_help(void);
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
-void help_history(void);
+void hlp_all(void);
+void hlp_alias(void);
+void hlp_cd(void);
+void hlp_exit(void);
+void hlp_help(void);
+void hlp_env(void);
+void hlp_setenv(void);
+void hlp_unsetenv(void);
+void hlp_history(void);
 
 int proc_file_commands(char *file_path, int *exe_ret);
 #endif /* _SHELL_H_ */
