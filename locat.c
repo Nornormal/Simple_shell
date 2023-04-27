@@ -46,7 +46,7 @@ char *g_location(char *cmd)
 }
 
 /**
- * fill_path_dir - func Copy path + also replaces colons (:) with 
+ * fill_path_dir - func Copy path + also replaces colons (:) with
  * 	current working directory.
  * @path: The colon-separated list of directories.
  *
