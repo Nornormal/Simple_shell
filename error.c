@@ -1,111 +1,111 @@
 #include "shell.h"
 
 /**
- * num_len - Counts the digit length of a number.
- * @num: The number to measure.
+ * nmb_ln - func to ount the digit length of a number.
+ * @nmb: number to measure.
  *
- * Return: The digit length.
+ * Return: length of the digit.
  */
-int num_len(int num)
+int nmb_ln(int nmb)
 {
-	unsigned int num1;
-	int len = 1;
+	unsigned int nmb1;
+	int ln = 1;
 
-	if (num < 0)
+	if (nmb < 0)
 	{
-		len++;
-		num1 = num * -1;
+		ln++;
+		nmb1 = nmb * -1;
 	}
 	else
 	{
-		num1 = num;
+		nmb1 = nmb;
 	}
-	while (num1 > 9)
+	while (nmb1 > 9)
 	{
-		len++;
-		num1 /= 10;
+		ln++;
+		nmb1 /= 10;
 	}
 
-	return (len);
+	return (ln);
 }
 
 /**
- * _itoa - Converts an integer to a string.
- * @num: The integer.
+ * _itoa - func to convert integer to a string.
+ * @nmb: input integer.
  *
- * Return: The converted string.
+ * Return: converted string.
  */
-char *_itoa(int num)
+char *_itoa(int nmb)
 {
-	char *buffer;
-	int len = num_len(num);
-	unsigned int num1;
+	char *bufr;
+	int ln = nmb_ln(nmb);
+	unsigned int nmb1;
 
-	buffer = malloc(sizeof(char) * (len + 1));
-	if (!buffer)
+	buf = malloc(sizeof(char) * (ln + 1));
+	if (!buf)
 		return (NULL);
 
-	buffer[len] = '\0';
+	buf[ln] = '\0';
 
-	if (num < 0)
+	if (nmb < 0)
 	{
-		num1 = num * -1;
-		buffer[0] = '-';
+		nmb1 = nmb * -1;
+		buf[0] = '-';
 	}
 	else
 	{
-		num1 = num;
+		nmb1 = nmb;
 	}
 
-	len--;
+	ln--;
 	do {
-		buffer[len] = (num1 % 10) + '0';
-		num1 /= 10;
-		len--;
-	} while (num1 > 0);
+		buf[ln] = (nmb1 % 10) + '0';
+		nmb1 /= 10;
+		ln--;
+	} while (nmb1 > 0);
 
-	return (buffer);
+	return (buf);
 }
 
 
 /**
- * create_error - Writes a custom error message to stderr.
- * @args: An array of arguments.
- * @err: The error value.
+ * cr_err - func to write a custom error message to stderr.
+ * @ag: array of arguments.
+ * @err: error value.
  *
- * Return: The error value.
+ * Return: error value.
  */
-int create_error(char **args, int err)
+int cr_err(char **ag, int n_err)
 {
-	char *error;
+	char *err;
 
-	switch (err)
+	switch (n_err)
 	{
 	case -1:
-		error = error_env(args);
+		err = err_env(ag);
 		break;
 	case 1:
-		error = error_1(args);
+		err = err_1(ag);
 		break;
 	case 2:
-		if (*(args[0]) == 'e')
-			error = error_2_exit(++args);
-		else if (args[0][0] == ';' || args[0][0] == '&' || args[0][0] == '|')
-			error = error_2_syntax(args);
+		if (*(ag[0]) == 'e')
+			err = err_2_exit(++ag);
+		else if (ag[0][0] == ';' || ag[0][0] == '&' || ag[0][0] == '|')
+			err = err_2_syntax(ag);
 		else
-			error = error_2_cd(args);
+			err = err_2_cd(ag);
 		break;
 	case 126:
-		error = error_126(args);
+		err = err_126(ag);
 		break;
 	case 127:
-		error = error_127(args);
+		err = err_127(ag);
 		break;
 	}
-	write(STDERR_FILENO, error, _strlen(error));
+	write(STDERR_FILENO, err, _strlen(err));
 
-	if (error)
-		free(error);
-	return (err);
+	if (err)
+		free(err);
+	return (n_err);
 
 }
