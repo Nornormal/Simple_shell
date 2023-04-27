@@ -49,14 +49,14 @@ int call_ag(char **ag, char **frnt, int *ex_retn)
 
 	if (!ag[0])
 		return (*ex_retn);
-	for (idx = 0; args[idx]; idx++)
+	for (idx = 0; ag[idx]; idx++)
 	{
 		if (_strncmp(ag[idx], "||", 2) == 0)
 		{
 			free(ag[idx]);
 			ag[idx] = NULL;
-			ag = replace_alias(ag);
-			ret = run_ag(ag, frnt, ex_retn);
+			ag = rep_alias(ag);
+			retn = run_ag(ag, frnt, ex_retn);
 			if (*ex_retn != 0)
 			{
 				ag = &ag[++idx];
@@ -73,9 +73,9 @@ int call_ag(char **ag, char **frnt, int *ex_retn)
 		{
 			free(ag[idx]);
 			ag[idx] = NULL;
-			ag = replace_alias(ag);
+			ag = rep_alias(ag);
 			retn = run_ag(ag, frnt, ex_retn);
-			if (*exe_ret == 0)
+			if (*ex_retn == 0)
 			{
 				ag = &ag[++idx];
 				idx = 0;
@@ -88,7 +88,7 @@ int call_ag(char **ag, char **frnt, int *ex_retn)
 			}
 		}
 	}
-	ag = replace_alias(ag);
+	ag = rep_alias(ag);
 	retn = run_ag(ag, frnt, ex_retn);
 	return (retn);
 }
@@ -106,7 +106,7 @@ int run_ag(char **ag, char **frnt, int *ex_retn)
 	int retn, i;
 	int (*builtin)(char **ag, char **frnt);
 
-	builtin = get_builtin(ag[0]);
+	builtin = g_builtin(ag[0]);
 
 	if (builtin)
 	{
