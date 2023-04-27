@@ -1,18 +1,18 @@
 #include "shell.h"
 
 /**
- * free_args - Frees up memory taken by args.
- * @args: A null-terminated double pointer containing commands/arguments.
- * @front: A double pointer to the beginning of args.
+ * fre_ag - func to free up memory.
+ * @ag: null-terminated pointer to  pointer containing commands/arguments.
+ * @frnt: pointer to pointer to the beginning of args.
  */
-void free_args(char **args, char **front)
+void fre_ag(char **ag, char **frnt)
 {
 	size_t i;
 
-	for (i = 0; args[i] || args[i + 1]; i++)
-		free(args[i]);
+	for (i = 0; ag[i] || ag[i + 1]; i++)
+		free(ag[i]);
 
-	free(front);
+	free(frnt);
 }
 
 /**
