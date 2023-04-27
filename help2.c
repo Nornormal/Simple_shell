@@ -45,138 +45,138 @@ void hndl_lne(char **lne, ssize_t rread)
 					continue;
 				}
 				if (prev != ' ')
-					new_line[j++] = ' ';
-				new_line[j++] = ';';
-				if (next != ' ')
-					new_line[j++] = ' ';
+					n_lne[j++] = ' ';
+				n_lne[j++] = ';';
+				if (nxt != ' ')
+					n_lne[j++] = ' ';
 				continue;
 			}
-			else if (current == '&')
+			else if (curr == '&')
 			{
-				if (next == '&' && previous != ' ')
-					new_line[j++] = ' ';
-				else if (previous == '&' && next != ' ')
+				if (nxt == '&' && prev != ' ')
+					n_lne[j++] = ' ';
+				else if (prev == '&' && nxt != ' ')
 				{
-					new_line[j++] = '&';
-					new_line[j++] = ' ';
+					n_lne[j++] = '&';
+					n_lne[j++] = ' ';
 					continue;
 				}
 			}
-			else if (current == '|')
+			else if (curr == '|')
 			{
-				if (next == '|' && previous != ' ')
-					new_line[j++]  = ' ';
-				else if (previous == '|' && next != ' ')
+				if (nxt == '|' && prev != ' ')
+					n_lne[j++]  = ' ';
+				else if (prev == '|' && nxt != ' ')
 				{
-					new_line[j++] = '|';
-					new_line[j++] = ' ';
+					n_lne[j++] = '|';
+					n_lne[j++] = ' ';
 					continue;
 				}
 			}
 		}
-		else if (current == ';')
+		else if (curr == ';')
 		{
-			if (i != 0 && old_line[i - 1] != ' ')
-				new_line[j++] = ' ';
-			new_line[j++] = ';';
-			if (next != ' ' && next != ';')
-				new_line[j++] = ' ';
+			if (i != 0 && o_lne[i - 1] != ' ')
+				n_lne[j++] = ' ';
+			n_lne[j++] = ';';
+			if (nxt != ' ' && nxt != ';')
+				n_lne[j++] = ' ';
 			continue;
 		}
-		new_line[j++] = old_line[i];
+		n_lne[j++] = o_lne[i];
 	}
-	new_line[j] = '\0';
+	n_lne[j] = '\0';
 
-	free(*line);
-	*line = new_line;
+	free(*lne);
+	*lne = n_lne;
 }
 
 /**
- * get_new_len - Gets the new length of a line partitioned
+ * g_n_ln - func to get new length of a line partitioned
  *               by ";", "||", "&&&", or "#".
- * @line: The line to check.
+ * @lne: line to be checked.
  *
- * Return: The new length of the line.
+ * Return: new length of the line.
  *
  * Description: Cuts short lines containing '#' comments with '\0'.
  */
 
-ssize_t get_new_len(char *line)
+ssize_t g_n_ln(char *lne)
 {
 	size_t i;
-	ssize_t new_len = 0;
-	char current, next;
+	ssize_t n_ln = 0;
+	char curr, nxt;
 
-	for (i = 0; line[i]; i++)
+	for (i = 0; lne[i]; i++)
 	{
-		current = line[i];
-		next = line[i + 1];
-		if (current == '#')
+		curr = lne[i];
+		nxt = lne[i + 1];
+		if (curr == '#')
 		{
-			if (i == 0 || line[i - 1] == ' ')
+			if (i == 0 || lne[i - 1] == ' ')
 			{
-				line[i] = '\0';
+				lne[i] = '\0';
 				break;
 			}
 		}
 		else if (i != 0)
 		{
-			if (current == ';')
+			if (curr == ';')
 			{
-				if (next == ';' && line[i - 1] != ' ' && line[i - 1] != ';')
+				if (nxt == ';' && lne[i - 1] != ' ' && lne[i - 1] != ';')
 				{
-					new_len += 2;
+					n_ln += 2;
 					continue;
 				}
-				else if (line[i - 1] == ';' && next != ' ')
+				else if (lne[i - 1] == ';' && nxt != ' ')
 				{
-					new_len += 2;
+					n_ln += 2;
 					continue;
 				}
-				if (line[i - 1] != ' ')
-					new_len++;
-				if (next != ' ')
-					new_len++;
+				if (lne[i - 1] != ' ')
+					n_ln++;
+				if (nxt != ' ')
+					n_ln++;
 			}
 			else
-				logical_ops(&line[i], &new_len);
+				logic_op(&lne[i], &n_ln);
 		}
-		else if (current == ';')
+		else if (curr == ';')
 		{
-			if (i != 0 && line[i - 1] != ' ')
-				new_len++;
-			if (next != ' ' && next != ';')
-				new_len++;
+			if (i != 0 && lne[i - 1] != ' ')
+				nw_ln++;
+			if (nxt != ' ' && nxt != ';')
+				n_ln++;
 		}
-		new_len++;
+		ne_ln++;
 	}
-	return (new_len);
+	return (n_ln);
 }
 /**
- * logical_ops - Checks a line for logical operators "||" or "&&".
- * @line: A pointer to the character to check in the line.
- * @new_len: Pointer to new_len in get_new_len function.
+ * logic_op - func to check a line for logical operators "||" or "&&".
+ * @lne: pointer to the character to be checked in the line.
+ * @n_ln: Pointer to new_len in @g_n_ln function.
  */
-void logical_ops(char *line, ssize_t *new_len)
+void logic_op(char *lne, ssize_t *n_ln)
 {
-	char previous, current, next;
+	char prev, curr, nxt;
 
-	previous = *(line - 1);
-	current = *line;
-	next = *(line + 1);
+	prev = *(lne - 1);
+	curr = *lne;
+	nxt = *(lne + 1);
 
-	if (current == '&')
+	if (curr == '&')
 	{
-		if (next == '&' && previous != ' ')
-			(*new_len)++;
-		else if (previous == '&' && next != ' ')
-			(*new_len)++;
+		if (nxt == '&' && prev != ' ')
+			(*n_ln)++;
+		else if (prev == '&' && nxt != ' ')
+			(*n_ln)++;
 	}
-	else if (current == '|')
+	else if (curr == '|')
 	{
-		if (next == '|' && previous != ' ')
-			(*new_len)++;
-		else if (previous == '|' && next != ' ')
-			(*new_len)++;
+		if (nxt == '|' && prev != ' ')
+			(*n_ln)++;
+		else if (prev == '|' && nxt != ' ')
+			(*n_ln)++;
 	}
 }
