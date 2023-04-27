@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * hlp_all - function prints all possible built-in shell_cmd commands.
+ * hlp_all - function prints all possible built-in shellby commands.
  */
 void hlp_all(void)
 {
 	char *outp;
 
-	outp = "Shell_cmd\nThese shell commands are defined internally..\n";
+	outp = "Shellby\nThese shell commands are defined internally..\n";
 	write(STDOUT_FILENO, outp, _strlen(outp));
 	outp = "Read more about the function 'name'..\n\n  alias   \t";
 	write(STDOUT_FILENO, outp, _strlen(outp));
@@ -24,7 +24,7 @@ void hlp_all(void)
 }
 
 /**
- * hlp_alias - function prints information on the built-in shell_cmd command 'alias'.
+ * hlp_alias - function prints information on the built-in shellby command 'alias'.
  */
 void hlp_alias(void)
 {
@@ -46,7 +46,7 @@ void hlp_alias(void)
 }
 
 /**
- * hlp_cd - function prints information on the built-in shell_cmd command 'cd'.
+ * hlp_cd - function prints information on the built-in shellby command 'cd'.
  */
 void hlp_cd(void)
 {
@@ -66,7 +66,7 @@ void hlp_cd(void)
 }
 
 /**
- * hlp_exit - function prints information on the built-in shell_cmd command 'exit'.
+ * hlp_exit - function prints information on the built-in shellby command 'exit'.
  */
 void hlp_exit(void)
 {
@@ -82,11 +82,11 @@ void hlp_exit(void)
 }
 
 /**
- * hlp_help - function prints information on the built-in shell_cmd command 'help'.
+ * hlp_help - function prints information on the built-in shellby command 'help'.
  */
 void hlp_help(void)
 {
-	char *outp = "help: help\n\tSee all possible built-in shell_cmd commands..\n";
+	char *outp = "help: help\n\tSee all possible built-in shellby commands..\n";
 
 	write(STDOUT_FILENO, outp, _strlen(outp));
 	outp = "\n   help [BUILTIN NAME]\n\tSee specific information on each ";
