@@ -1,5 +1,10 @@
 #include "shell.h"
 
+int (*g_builtin(char *cmd))(char **ag, char **frnt);
+int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_exit(char **ag, char **frnt);
+
 /**
  * g_builtin - function that matches a command with a corresponding
  *               shell_cmd built-in function.
