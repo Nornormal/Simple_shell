@@ -1,149 +1,149 @@
 #include "shell.h"
 
 /**
- * shellby_alias - Builtin command that either prints all aliases, specific
- * aliases, or sets an alias.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * shell_cmd_alias - is a built-in command that prints either all alias, specific
+ * alias, or sets an alias.
+ * @ag: array of arguments.
+ * @frnt: pointer to pointer to the beginning of args.
  *
- * Return: If an error occurs - -1.
- *         Otherwise - 0.
+ * Return: -1 when error occurs.
+ *         or - 0.
  */
-int shellby_alias(char **args, char __attribute__((__unused__)) **front)
+int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt)
 {
-	alias_t *temp = aliases;
-	int i, ret = 0;
-	char *value;
+	alias_t *tmp = alias;
+	int i, retn = 0;
+	char *val;
 
-	if (!args[0])
+	if (!ag[0])
 	{
-		while (temp)
+		while (tmp)
 		{
-			print_alias(temp);
-			temp = temp->next;
+			pr_alias(tmp);
+			tmp = tmp->nxt;
 		}
-		return (ret);
+		return (retn);
 	}
-	for (i = 0; args[i]; i++)
+	for (i = 0; ag[i]; i++)
 	{
-		temp = aliases;
-		value = _strchr(args[i], '=');
-		if (!value)
+		tmp = alias;
+		val = _strchr(ag[i], '=');
+		if (!val)
 		{
-			while (temp)
+			while (tmp)
 			{
-				if (_strcmp(args[i], temp->name) == 0)
+				if (_strcmp(ag[i], tmp->nme) == 0)
 				{
-					print_alias(temp);
+					pr_alias(tmp);
 					break;
 				}
-				temp = temp->next;
+				tmp = tmp->nxt;
 			}
-			if (!temp)
-				ret = create_error(args + i, 1);
+			if (!tmp)
+				retn = cr_err(ag + i, 1);
 		}
 		else
-			set_alias(args[i], value);
+			st_alias(ag[i], val);
 	}
-	return (ret);
+	return (retn);
 }
 
 /**
- * set_alias - Will either set an existing alias 'name' with a new value,
- * 'value' or creates a new alias with 'name' and 'value'.
- * @var_name: Name of the alias.
- * @value: Value of the alias. First character is a '='.
+ * st_alias - function that either set an existing alias 'name' with new value,
+ * 'value' or creates new alias with 'name' and 'value'.
+ * @var_nme: alias name.
+ * @val: alias value. First character is a '='.
  */
-void set_alias(char *var_name, char *value)
+void st_alias(char *var_nme, char *val)
 {
-	alias_t *temp = aliases;
-	int len, j, k;
-	char *new_value;
+	alias_t *tmp = aliases;
+	int ln, a, b;
+	char *n_val;
 
-	*value = '\0';
-	value++;
-	len = _strlen(value) - _strspn(value, "'\"");
-	new_value = malloc(sizeof(char) * (len + 1));
-	if (!new_value)
+	*val = '\0';
+	val++;
+	len = _strlen(val) - _strspn(val, "'\"");
+	n_val = malloc(sizeof(char) * (ln + 1));
+	if (!n_val)
 		return;
-	for (j = 0, k = 0; value[j]; j++)
+	for (a = 0, b = 0; val[a]; a++)
 	{
-		if (value[j] != '\'' && value[j] != '"')
-			new_value[k++] = value[j];
+		if (val[j] != '\'' && val[a] != '"')
+			n_val[b++] = val[a];
 	}
-	new_value[k] = '\0';
-	while (temp)
+	n_val[b] = '\0';
+	while (tmp)
 	{
-		if (_strcmp(var_name, temp->name) == 0)
+		if (_strcmp(var_nme, tmp->nme) == 0)
 		{
-			free(temp->value);
-			temp->value = new_value;
+			free(tmp->val);
+			tmp->val = n_val;
 			break;
 		}
-		temp = temp->next;
+		tmp = tmp->nxt;
 	}
-	if (!temp)
-		add_alias_end(&aliases, var_name, new_value);
+	if (!tmp)
+		add_aliasend(&aliases, var_nme, n_val);
 }
 
 /**
- * print_alias - Prints the alias in the format name='value'.
- * @alias: Pointer to an alias.
+ * pr_alias - function that print the alias in the format name='value'.
+ * @alias: Pointer to alias.
  */
-void print_alias(alias_t *alias)
+void pr_alias(alias_t *alias)
 {
-	char *alias_string;
-	int len = _strlen(alias->name) + _strlen(alias->value) + 4;
+	char *alias_str;
+	int ln = _strlen(alias->nme) + _strlen(alias->val) + 4;
 
-	alias_string = malloc(sizeof(char) * (len + 1));
-	if (!alias_string)
+	alias_str = malloc(sizeof(char) * (ln + 1));
+	if (!alias_str)
 		return;
-	_strcpy(alias_string, alias->name);
-	_strcat(alias_string, "='");
-	_strcat(alias_string, alias->value);
-	_strcat(alias_string, "'\n");
+	_strcpy(alias_str, alias->nme);
+	_strcat(alias_str, "='");
+	_strcat(alias_str, alias->val);
+	_strcat(alias_str, "'\n");
 
-	write(STDOUT_FILENO, alias_string, len);
-	free(alias_string);
+	write(STDOUT_FILENO, alias_str, ln);
+	free(alias_str);
 }
 /**
- * replace_aliases - Goes through the arguments and replace any matching alias
+ * rep_alias - func that goes through the arguments and replace any matching alias
  * with their value.
- * @args: 2D pointer to the arguments.
+ * @ag: pointer to pointer to the arguments.
  *
- * Return: 2D pointer to the arguments.
+ * Return: pointer to pointer to the arguments.
  */
-char **replace_aliases(char **args)
+char **rep_alias(char **ag)
 {
-	alias_t *temp;
+	alias_t *tmp;
 	int i;
-	char *new_value;
+	char *n_val;
 
-	if (_strcmp(args[0], "alias") == 0)
-		return (args);
-	for (i = 0; args[i]; i++)
+	if (_strcmp(ag[0], "alias") == 0)
+		return (ag);
+	for (i = 0; ag[i]; i++)
 	{
-		temp = aliases;
-		while (temp)
+		tmp = alias;
+		while (tmp)
 		{
-			if (_strcmp(args[i], temp->name) == 0)
+			if (_strcmp(ag[i], tmp->nme) == 0)
 			{
-				new_value = malloc(sizeof(char) * (_strlen(temp->value) + 1));
-				if (!new_value)
+				n_val = malloc(sizeof(char) * (_strlen(tmp->val) + 1));
+				if (!n_val)
 				{
-					free_args(args, args);
+					free_ag(ag, ag);
 					return (NULL);
 				}
-				_strcpy(new_value, temp->value);
-				free(args[i]);
-				args[i] = new_value;
+				_strcpy(n_val, tmp->val);
+				free(ag[i]);
+				ag[i] = n_val;
 				i--;
 				break;
 			}
-			temp = temp->next;
+			tmp = tmp->nxt;
 		}
 	}
 
-	return (args);
+	return (ag);
 }
 
