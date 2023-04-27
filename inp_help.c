@@ -189,14 +189,14 @@ int check_ag(char **ag)
 
 	for (i = 0; ag[i]; i++)
 	{
-		cur = ag[i];
-		if (cur[0] == ';' || cur[0] == '&' || cur[0] == '|')
+		curr = ag[i];
+		if (curr[0] == ';' || curr[0] == '&' || curr[0] == '|')
 		{
-			if (i == 0 || cur[1] == ';')
-				return (create_error(&ag[i], 2));
-			nex = ag[i + 1];
-			if (nex && (nex[0] == ';' || nex[0] == '&' || nex[0] == '|'))
-				return (create_error(&ag[i + 1], 2));
+			if (i == 0 || curr[1] == ';')
+				return (cr_err(&ag[i], 2));
+			nxt = ag[i + 1];
+			if (nxt && (nxt[0] == ';' || nxt[0] == '&' || nxt[0] == '|'))
+				return (cr_err(&ag[i + 1], 2));
 		}
 	}
 	return (0);
