@@ -52,99 +52,98 @@ char *g_pid(void)
 }
 
 /**
- * g_env_val - Gets the value corresponding to an environmental variable.
- * @begin: The environmental variable to search for.
- * @len: The length of the environmental variable to search for.
+ * g_env_val - it gets value corresponding to an env variable.
+ * @begin: The env variable to search for.
+ * @ln: length of the env variable to search for.
  *
- * Return: If the variable is not found - an empty string.
- *         Otherwise - the value of the environmental variable.
+ * Return: empty string when the variable is not found.
+ *         or - value of the env variable.
  *
- * Description: Variables are stored in the format VARIABLE=VALUE.
+ * Description: Variables were stored in the format VARIABLE=VALUE.
  */
 char *g_env_val(char *begin, int ln)
 {
 	char **var_addr;
 	char *replace = NULL, *tmp, *var;
 
-	var = malloc(len + 1);
+	var = malloc(ln + 1);
 	if (!var)
 		return (NULL);
 	var[0] = '\0';
-	_strncat(var, beginning, len);
+	_strncat(var, begin, ln);
 
 	var_addr = _getenv(var);
 	free(var);
 	if (var_addr)
 	{
-		temp = *var_addr;
-		while (*temp != '=')
-			temp++;
-		temp++;
-		replacement = malloc(_strlen(temp) + 1);
-		if (replacement)
-			_strcpy(replacement, temp);
+		tmp = *var_addr;
+		while (*tmp != '=')
+			tmp++;
+		tmp++;
+		replace = malloc(_strlen(tmp) + 1);
+		if (replace)
+			_strcpy(replace, tmp);
 	}
 
-	return (replacement);
+	return (replace);
 }
 
 /**
- * variable_replacement - Handles variable replacement.
- * @line: A double pointer containing the command and arguments.
- * @exe_ret: A pointer to the return value of the last executed command.
+ * var_replace - it handles variable replacement.
+ * @lne: pointer to pointer containing command and arguments.
+ * @ex_retn: pointer to the return value of last executed command.
  *
- * Description: Replaces $$ with the current PID, $? with the return value
- *              of the last executed program, and envrionmental variables
+ * Description: Replaces $$ with the current Porcess ID, $? with the return value
+ *              of the last executed program, and envr variables
  *              preceded by $ with their corresponding value.
  */
-void variable_replacement(char **line, int *exe_ret)
+void var_replace(char **lne, int *ex_retn)
 {
-	int j, k = 0, len;
-	char *replacement = NULL, *old_line = NULL, *new_line;
+	int a, b = 0, ln;
+	char *replace = NULL, *o_lne = NULL, *n_lne;
 
-	old_line = *line;
-	for (j = 0; old_line[j]; j++)
+	o_lne = *lne;
+	for (a = 0; o_lne[a]; a++)
 	{
-		if (old_line[j] == '$' && old_line[j + 1] &&
-				old_line[j + 1] != ' ')
+		if (o_lne[a] == '$' && o_lne[a + 1] &&
+				o_lne[a + 1] != ' ')
 		{
-			if (old_line[j + 1] == '$')
+			if (o_lne[a + 1] == '$')
 			{
-				replacement = get_pid();
-				k = j + 2;
+				replace = g_pid();
+				b = a + 2;
 			}
-			else if (old_line[j + 1] == '?')
+			else if (o_lne[a + 1] == '?')
 			{
-				replacement = _itoa(*exe_ret);
-				k = j + 2;
+				replace = _itoa(*ex_retn);
+				b = a + 2;
 			}
-			else if (old_line[j + 1])
+			else if (o_lne[a + 1])
 			{
-				/* extract the variable name to search for */
-				for (k = j + 1; old_line[k] &&
-						old_line[k] != '$' &&
-						old_line[k] != ' '; k++)
+				for (b = a + 1; o_lne[b] &&
+						o_lne[b] != '$' &&
+						o_lne[b] != ' '; b++)
 					;
-				len = k - (j + 1);
-				replacement = get_env_value(&old_line[j + 1], len);
+				ln = b - (a + 1);
+				replace = g_env_val(&o_lne[a + 1], ln);
 			}
-			new_line = malloc(j + _strlen(replacement)
-					  + _strlen(&old_line[k]) + 1);
-			if (!line)
+			n_lne = malloc(a + _strlen(replace)
+					  + _strlen(&o_lne[b]) + 1);
+			if (!lne)
 				return;
-			new_line[0] = '\0';
-			_strncat(new_line, old_line, j);
-			if (replacement)
+			n_lne[0] = '\0';
+			_strncat(n_lne, o_lne, a);
+			if (replace)
 			{
-				_strcat(new_line, replacement);
-				free(replacement);
-				replacement = NULL;
+				_strcat(n_lne, replace);
+				free(replace);
+				replace = NULL;
 			}
-			_strcat(new_line, &old_line[k]);
-			free(old_line);
-			*line = new_line;
-			old_line = new_line;
-			j = -1;
+			_strcat(n_lne, &o_lne[b]);
+			free(o_lne);
+			*lne = n_lne;
+			o_lne = n_lne;
+			a = -1;
 		}
 	}
 }
