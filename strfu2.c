@@ -1,62 +1,35 @@
 #include "shell.h"
 
 /**
- * _strchr - Locates a character in a string.
- * @s: The string to be searched.
- * @c: The character to be located.
+ * _strchr - func to locate a character in a string.
+ * @s: string to be searche.
+ * @c: character to be locate.
  *
- * Return: If c is found - a pointer to the first occurence.
- *         If c is not found - NULL.
+ * Return: If c is found - a pointer to the first occur.
+ *         If not found - NULL.
  */
 char *_strchr(char *s, char c)
 {
 	int index;
 
-	for (index = 0; s[index]; index++)
+	for (idx = 0; s[idx]; idx++)
 	{
-		if (s[index] == c)
-			return (s + index);
+		if (s[idx] == c)
+			return (s + idx);
 	}
 
 	return (NULL);
 }
 
-/**
- * _strspn - Gets the length of a prefix substring.
- * @s: The string to be searched.
- * @accept: The prefix to be measured.
- *
- * Return: The number of bytes in s which
- *         consist only of bytes from accept.
- */
-int _strspn(char *s, char *accept)
-{
-	int bytes = 0;
-	int index;
-
-	while (*s)
-	{
-		for (index = 0; accept[index]; index++)
-		{
-			if (*s == accept[index])
-			{
-				bytes++;
-				break;
-			}
-		}
-		s++;
-	}
-	return (bytes);
-}
 
 /**
- * _strcmp - Compares two strings.
- * @s1: The first string to be compared.
- * @s2: The second string to be compared.
+ * _strcmp - func compare two string.
+ * @s1: first string to compare.
+ * @s2: second string to compare.
  *
- * Return: Positive byte difference if s1 > s2
+ * Return: +ve byte difference if s1 > s2
  *         0 if s1 = s2
- *         Negative byte difference if s1 < s2
+ *         -ve byte difference if s1 < s2
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -65,7 +38,6 @@ int _strcmp(char *s1, char *s2)
 		s1++;
 		s2++;
 	}
-
 	if (*s1 != *s2)
 		return (*s1 - *s2);
 
@@ -73,14 +45,14 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _strncmp - Compare two strings.
- * @s1: Pointer to a string.
- * @s2: Pointer to a string.
- * @n: The first n bytes of the strings to compare.
+ * _strncmp - compare two strings.
+ * @s1: a pointer to a string.
+ * @s2: a pointer to a string.
+ * @n: first n byte of the string to compare.
  *
- * Return: Less than 0 if s1 is shorter than s2.
+ * Return: less than 0 if s1 is shorter than s2.
  *         0 if s1 and s2 match.
- *         Greater than 0 if s1 is longer than s2.
+ *         greater than 0 if s1 is longer than s2.
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -97,4 +69,31 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	else
 		return (-15);
+}
+
+/**
+ * _strspn - func calc the len of a prev substring.
+ * @s: string to be search.
+ * @accept: prev to be measure.
+ *
+ * Return: number of bytes in s.
+ */
+int _strspn(char *s, char *acpt)
+{
+	int byte = 0;
+	int idx;
+
+	while (*s)
+	{
+		for (idx = 0; acpt[idx]; idx++)
+		{
+			if (*s == acpt[idx])
+			{
+				byte++;
+				break;
+			}
+		}
+		s++;
+	}
+	return (byte);
 }
