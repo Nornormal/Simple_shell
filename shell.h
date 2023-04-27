@@ -24,8 +24,8 @@ int hist;
 
 /**
  * struct list_s - A new struct type defining a linked list.
- * @dir: A directory path.
- * @next: A pointer to another struct list_s.
+ * @dir: A current directory path.
+ * @next: A pointer to next struct list_s.
  */
 typedef struct list_s
 {
@@ -34,14 +34,14 @@ typedef struct list_s
 } list_t;
 
 /**
- * struct builtin_s - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
+ * struct built-in_s - A new struct type defining built-in commands.
+ * @name: The name of the built-in command.
  * @f: A function pointer to the builtin command's function.
  */
 typedef struct builtin_s
 {
 	char *name;
-	int (*f)(char **argv, char **front);
+	int (*f)(char **av, char **frnt);
 } builtin_t;
 
 /**
@@ -60,16 +60,6 @@ typedef struct alias_s
 /* Global aliases linked list */
 alias_t *aliases;
 
-/* Main Helpers */
-ssize_t _getline(char **lpnt, size_t *n, FILE *r_stream);
-void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size);
-char **_strtok(char *lne, char *delim);
-char *get_location(char *command);
-list_t *get_path_dir(char *path);
-int execute(char **ag, char **front);
-void free_list(list_t *head);
-char *_itoa(int num);
-
 /* Input Helpers */
 void handle_line(char **lne, ssize_t rread);
 ssize_t get_new_len(char *lne);
@@ -83,6 +73,16 @@ int check_args(char **ag);
 void free_args(char **args, char **front);
 char **replace_aliases(char **ag);
 
+void hlp_setenv(void);
+void hlp_unsetenv(void);
+void hlp_exit(void);
+void hlp_help(void);
+void hlp_history(void);
+void hlp_all(void);
+void hlp_alias(void);
+void hlp_cd(void);
+void hlp_env(void);
+
 /* String functions */
 int _strlen(const char *s);
 char *_strcat(char *dest, const char *src);
@@ -93,48 +93,50 @@ int _strspn(char *s, char *accept);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 
+/* Main Helpers */
+char *g_location(char *command);
+list_t *g_path_dir(char *path);
+int execute(char **ag, char **front);
+void fre_list(list_t *head);
+void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size);
+ssize_t _getline(char **lpnt, size_t *n, FILE *r_stream);
+char **_strtok(char *lne, char *delim);
+char *_itoa(int num);
+
 /* Builtins */
 int (*get_builtin(char *command))(char **ag, char **frnt);
-int shell_cmd_exit(char **args, char **front);
-int shell_cmd_env(char **args, char __attribute__((__unused__)) **front);
-int shell_cmd_setenv(char **args, char __attribute__((__unused__)) **front);
-int shell_cmd_unsetenv(char **args, char __attribute__((__unused__)) **front);
-int shell_cmd_cd(char **args, char __attribute__((__unused__)) **front);
-int shell_cmd_alias(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_exit(char **ag, char **front);
+int shell_cmd_setenv(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_unsetenv(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_env(char **ag, char __attribute__((__unused__)) **frnt);
 void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
-int shell_cmd_help(char **args, char __attribute__((__unused__)) **front);
+int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
+
 
 /* Builtin Helpers */
 char **_cpenv(void);
-void free_env(void);
+void fre_env(void);
 char **_getenv(const char *var);
 
 /* Error Handling */
-int create_error(char **args, int err);
-char *error_env(char **args);
-char *error_1(char **args);
-char *error_2_exit(char **args);
-char *error_2_cd(char **args);
-char *error_2_syntax(char **args);
-char *error_126(char **args);
-char *error_127(char **args);
+int create_error(char **ag, int err);
+char *error_env(char **ag);
+char *error_1(char **ag);
+char *error_2_exit(char **ag);
+char *error_2_cd(char **ag);
+char *error_2_syntax(char **ag);
+char *error_126(char **ag);
+char *error_127(char **ag);
 
 /* Linkedlist Helpers */
-alias_t *add_alias_end(alias_t **head, char *name, char *value);
-void free_alias_list(alias_t *head);
-list_t *add_node_end(list_t **head, char *dir);
-void free_list(list_t *head);
+alias_t *add_alias_end(alias_t **hd, char *nme, char *val);
+void fre_alias_list(alias_t *hd);
+list_t *add_node_end(list_t **hd, char *dir);
+void fre_list(list_t *hd);
 
-void hlp_all(void);
-void hlp_alias(void);
-void hlp_cd(void);
-void hlp_exit(void);
-void hlp_help(void);
-void hlp_env(void);
-void hlp_setenv(void);
-void hlp_unsetenv(void);
-void hlp_history(void);
 
-int proc_file_commands(char *file_path, int *exe_ret);
+int proc_file_commands(char *f_path, int *exe_retn);
 #endif /* _SHELL_H_ */
