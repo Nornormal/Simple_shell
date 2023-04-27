@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * shell_cmd_alias - is a built-in command that prints either all alias, specific
+ * shellby_alias - is a built-in command that prints either all alias, specific
  * alias, or sets an alias.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
@@ -9,7 +9,7 @@
  * Return: -1 when error occurs.
  *         or - 0.
  */
-int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt)
+int shellby_alias(char **ag, char __attribute__((__unused__)) **frnt)
 {
 	alias_t *tmp = alias;
 	int i, retn = 0;
