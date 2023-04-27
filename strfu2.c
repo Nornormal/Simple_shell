@@ -74,7 +74,7 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 /**
  * _strspn - func calc the len of a prev substring.
  * @s: string to be search.
- * @accept: prev to be measure.
+ * @acpt: prev to be measure.
  *
  * Return: number of bytes in s.
  */
