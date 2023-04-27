@@ -119,7 +119,6 @@ int run_ag(char **ag, char **frnt, int *ex_retn)
 		*ex_retn = execute(ag, frnt);
 		retn = *ex_retn;
 	}
-
 	hst++;
 
 	for (i = 0; ag[i]; i++)
