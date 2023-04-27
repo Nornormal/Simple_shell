@@ -1,96 +1,96 @@
 #include "shell.h"
 
 /**
- * get_args - Gets a command from standard input.
- * @line: A buffer to store the command.
- * @exe_ret: The return value of the last executed command.
+ * g_ag - func gets a command input.
+ * @lne: buff to store command.
+ * @ex_retn: return value of the last command.
  *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the stored command.
+ * Return: NULL - If an error occur.
+ *         or - a pointer to stored command.
  */
-char *get_args(char *line, int *exe_ret)
+char *g_ag(char *lne, int *ex_retn)
 {
 	size_t n = 0;
 	ssize_t read;
-	char *prompt = "$ ";
+	char *pmpt = "$ ";
 
-	if (line)
-		free(line);
+	if (lne)
+		free(lne);
 
-	read = _getline(&line, &n, STDIN_FILENO);
+	read = _getline(&lne, &n, STDIN_FILENO);
 	if (read == -1)
 		return (NULL);
 	if (read == 1)
 	{
-		hist++;
+		hst++;
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, prompt, 2);
-		return (get_args(line, exe_ret));
+			write(STDOUT_FILENO, pmpt, 2);
+		return (g_ag(lne, ex_retn));
 	}
 
-	line[read - 1] = '\0';
-	variable_replacement(&line, exe_ret);
-	handle_line(&line, read);
+	lne[read - 1] = '\0';
+	var_replace(&lne, ex_retn);
+	hndl_lne(&lne, read);
 
-	return (line);
+	return (lne);
 }
 
 /**
- * call_args - Partitions operators from commands and calls them.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
- * @exe_ret: The return value of the parent process' last executed command.
+ * call_ag - func partitions operators from commands.
+ * @ag: array of argument.
+ * @frnt: a pointer to pointer to the beginning of args.
+ * @ex_retn: return value of last command.
  *
- * Return: The return value of the last executed command.
+ * Return: return value of the last command.
  */
-int call_args(char **args, char **front, int *exe_ret)
+int call_ag(char **ag, char **frnt, int *ex_retn)
 {
-	int ret, index;
+	int retn, idx;
 
-	if (!args[0])
-		return (*exe_ret);
-	for (index = 0; args[index]; index++)
+	if (!ag[0])
+		return (*ex_retn);
+	for (idx = 0; args[idx]; idx++)
 	{
-		if (_strncmp(args[index], "||", 2) == 0)
+		if (_strncmp(ag[idx], "||", 2) == 0)
 		{
-			free(args[index]);
-			args[index] = NULL;
-			args = replace_aliases(args);
-			ret = run_args(args, front, exe_ret);
-			if (*exe_ret != 0)
+			free(ag[idx]);
+			ag[idx] = NULL;
+			ag = replace_alias(ag);
+			ret = run_ag(ag, frnt, ex_retn);
+			if (*ex_retn != 0)
 			{
-				args = &args[++index];
-				index = 0;
+				ag = &ag[++idx];
+				idx = 0;
 			}
 			else
 			{
-				for (index++; args[index]; index++)
-					free(args[index]);
-				return (ret);
+				for (idx++; ag[idx]; idx++)
+					free(ag[idx]);
+				return (retn);
 			}
 		}
-		else if (_strncmp(args[index], "&&", 2) == 0)
+		else if (_strncmp(ag[idx], "&&", 2) == 0)
 		{
-			free(args[index]);
-			args[index] = NULL;
-			args = replace_aliases(args);
-			ret = run_args(args, front, exe_ret);
+			free(ag[idx]);
+			ag[idx] = NULL;
+			ag = replace_alias(ag);
+			retn = run_ag(ag, frnt, ex_retn);
 			if (*exe_ret == 0)
 			{
-				args = &args[++index];
-				index = 0;
+				ag = &ag[++idx];
+				idx = 0;
 			}
 			else
 			{
-				for (index++; args[index]; index++)
-					free(args[index]);
-				return (ret);
+				for (idx++; ag[idx]; idx++)
+					free(ag[idx]);
+				return (retn);
 			}
 		}
 	}
-	args = replace_aliases(args);
-	ret = run_args(args, front, exe_ret);
-	return (ret);
+	ag = replace_alias(ag);
+	retn = run_ag(ag, frnt, ex_retn);
+	return (retn);
 }
 
 /**
