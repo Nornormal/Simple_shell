@@ -102,15 +102,15 @@ int cnt_tok(char *str, char *delim);
 char *_itoa(int nmb);
 
 int (*g_builtin(char *cmd))(char **ag, char **frnt);
-int shell_cmd_exit(char **ag, char **frnt);
-int shell_cmd_setenv(char **ag, char __attribute__((__unused__)) **frnt);
-int shell_cmd_unsetenv(char **ag, char __attribute__((__unused__)) **frnt);
-int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
-int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt);
-int shell_cmd_env(char **ag, char __attribute__((__unused__)) **frnt);
+int shellby_exit(char **ag, char **frnt);
+int shellby_setenv(char **ag, char __attribute__((__unused__)) **frnt);
+int shellby_unsetenv(char **ag, char __attribute__((__unused__)) **frnt);
+int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt);
+int shellby_alias(char **ag, char __attribute__((__unused__)) **frnt);
+int shellby_env(char **ag, char __attribute__((__unused__)) **frnt);
 void st_alias(char *var_nme, char *val);
 void pr_alias(alias_t *alias);
-int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
+int shellby_hlp(char **ag, char __attribute__((__unused__)) **frnt);
 char *g_env_val(char *begin, int ln);
 
 char **_cpenv(void);
