@@ -71,7 +71,7 @@ char *_itoa(int nmb)
 /**
  * cr_err - func to write a custom error message to stderr.
  * @ag: array of arguments.
- * @err: error value.
+ * @n_err: error value.
  *
  * Return: error value.
  */
