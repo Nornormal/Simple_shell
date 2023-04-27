@@ -1,121 +1,121 @@
 #include "shell.h"
 
 /**
- * cant_open - If the file doesn't exist or lacks proper permissions, print
- * a cant open error.
- * @file_path: Path to the supposed file.
+ * cant_opn - func to print a "cant open" error, if
+ * the file doesn't exist or lacks proper permissions.
+ * @f_path: Path to the supposed file.
  *
  * Return: 127.
  */
 
-int cant_open(char *file_path)
+int cant_opn(char *f_path)
 {
-	char *error, *hist_str;
-	int len;
+	char *err, *hst_str;
+	int ln;
 
-	hist_str = _itoa(hist);
-	if (!hist_str)
+	hst_str = _itoa(hst);
+	if (!hst_str)
 		return (127);
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(file_path) + 16;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
+	ln = _strlen(nme) + _strlen(hst_str) + _strlen(f_path) + 16;
+	err = malloc(sizeof(char) * (ln + 1));
+	if (!err)
 	{
-		free(hist_str);
+		free(hst_str);
 		return (127);
 	}
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": Can't open ");
-	_strcat(error, file_path);
-	_strcat(error, "\n");
+	_strcpy(err, nme);
+	_strcat(err, ": ");
+	_strcat(err, hst_str);
+	_strcat(err, ": Can't Open ");
+	_strcat(err, f_path);
+	_strcat(err, "\n");
 
-	free(hist_str);
-	write(STDERR_FILENO, error, len);
-	free(error);
+	free(hst_str);
+	write(STDERR_FILENO, err, ln);
+	free(err);
 	return (127);
 }
 
 /**
- * proc_file_commands - Takes a file and attempts to run the commands stored
+ * proc_fle_cmd - func to take a file and attempt to run the commands stored
  * within.
- * @file_path: Path to the file.
- * @exe_ret: Return value of the last executed command.
+ * @f_path: Path to the file.
+ * @ex_retn: the return value of the last executed command.
  *
- * Return: If file couldn't be opened - 127.
- *	   If malloc fails - -1.
- *	   Otherwise the return value of the last command ran.
+ * Return: 127 when file couldn't be opened.
+ *	   or -1 when malloc fails.
+ *	   or the return value of the last command ran.
  */
-int proc_file_commands(char *file_path, int *exe_ret)
+int proc_fle_cmd(char *f_path, int *ex_retn)
 {
-	ssize_t file, b_read, i;
-	unsigned int line_size = 0;
-	unsigned int old_size = 120;
-	char *line, **args, **front;
-	char buffer[120];
-	int ret;
+	ssize_t fle, b_read, i;
+	unsigned int lne_size = 0;
+	unsigned int o_size = 120;
+	char *lne, **ag, **frnt;
+	char buf[120];
+	int retn;
 
-	hist = 0;
-	file = open(file_path, O_RDONLY);
-	if (file == -1)
+	hst = 0;
+	fle = open(f_path, O_RDONLY);
+	if (fle == -1)
 	{
-		*exe_ret = cant_open(file_path);
-		return (*exe_ret);
+		*ex_retn = cant_opn(f_path);
+		return (*ex_retn);
 	}
-	line = malloc(sizeof(char) * old_size);
-	if (!line)
+	lne = malloc(sizeof(char) * o_size);
+	if (!lne)
 		return (-1);
 	do {
-		b_read = read(file, buffer, 119);
-		if (b_read == 0 && line_size == 0)
-			return (*exe_ret);
-		buffer[b_read] = '\0';
-		line_size += b_read;
-		line = _realloc(line, old_size, line_size);
-		_strcat(line, buffer);
-		old_size = line_size;
+		b_read = read(fle, buf, 119);
+		if (b_read == 0 && lne_size == 0)
+			return (*ex_retn);
+		buf[b_read] = '\0';
+		lne_size += b_read;
+		lne = _realloc(lne, o_size, lne_size);
+		_strcat(lne, buf);
+		o_size = lne_size;
 	} while (b_read);
-	for (i = 0; line[i] == '\n'; i++)
-		line[i] = ' ';
-	for (; i < line_size; i++)
+	for (i = 0; lne[i] == '\n'; i++)
+		lne[i] = ' ';
+	for (; i < lne_size; i++)
 	{
-		if (line[i] == '\n')
+		if (lne[i] == '\n')
 		{
-			line[i] = ';';
-			for (i += 1; i < line_size && line[i] == '\n'; i++)
-				line[i] = ' ';
+			lne[i] = ';';
+			for (i += 1; i < lne_size && lne[i] == '\n'; i++)
+				lne[i] = ' ';
 		}
 	}
-	variable_replacement(&line, exe_ret);
-	handle_line(&line, line_size);
-	args = _strtok(line, " ");
-	free(line);
-	if (!args)
+	var_replace(&lne, ex_retn);
+	hndl_lne(&lne, lne_size);
+	ag = _strtok(lne, " ");
+	free(lne);
+	if (!ag)
 		return (0);
-	if (check_args(args) != 0)
+	if (check_ag(ag) != 0)
 	{
-		*exe_ret = 2;
-		free_args(args, args);
-		return (*exe_ret);
+		*ex_retn = 2;
+		fre_ag(g, g);
+		return (*ex_retn);
 	}
-	front = args;
+	frnt = ag;
 
-	for (i = 0; args[i]; i++)
+	for (i = 0; ag[i]; i++)
 	{
-		if (_strncmp(args[i], ";", 1) == 0)
+		if (_strncmp(ag[i], ";", 1) == 0)
 		{
-			free(args[i]);
-			args[i] = NULL;
-			ret = call_args(args, front, exe_ret);
-			args = &args[++i];
+			free(ag[i]);
+			ag[i] = NULL;
+			retn = call_ag(ag, frnt, ex_retn);
+			ag = &ag[++i];
 			i = 0;
 		}
 	}
 
-	ret = call_args(args, front, exe_ret);
+	retn = call_ag(ag, frnt, ex_retn);
 
-	free(front);
-	return (ret);
+	free(frnt);
+	return (retn);
 }
