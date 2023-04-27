@@ -37,7 +37,7 @@ int nmb_ln(int nmb)
  */
 char *_itoa(int nmb)
 {
-	char *bufr;
+	char *buf;
 	int ln = nmb_ln(nmb);
 	unsigned int nmb1;
 
@@ -91,7 +91,7 @@ int cr_err(char **ag, int n_err)
 		if (*(ag[0]) == 'e')
 			err = err_2_exit(++ag);
 		else if (ag[0][0] == ';' || ag[0][0] == '&' || ag[0][0] == '|')
-			err = err_2_syntax(ag);
+			err = err_2_synt(ag);
 		else
 			err = err_2_cd(ag);
 		break;
