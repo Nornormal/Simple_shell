@@ -67,7 +67,7 @@ int run_ag(char **ag, char **frnt, int *ex_retn);
 int handle_ag(int *ex_retn);
 int check_ag(char **ag);
 void fre_ag(char **ag, char **frnt);
-char **replace_alias(char **ag);
+char **rep_alias(char **ag);
 
 void hlp_setenv(void);
 void hlp_unsetenv(void);
@@ -128,5 +128,5 @@ list_t *add_nodeend(list_t **hd, char *dir);
 void fre_list(list_t *hd);
 
 
-int proc_file_cmd(char *f_path, int *ex_retn);
+int proc_fle_cmd(char *f_path, int *ex_retn);
 #endif /* _SHELL_H_ */
