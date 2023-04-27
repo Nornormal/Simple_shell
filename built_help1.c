@@ -5,7 +5,7 @@
  */
 void hlp_all(void)
 {
-	char *outp; 
+	char *outp;
 
 	outp = "Shell_cmd\nThese shell commands are defined internally..\n";
 	write(STDOUT_FILENO, outp, _strlen(outp));
