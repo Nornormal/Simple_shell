@@ -37,7 +37,7 @@ char *g_location(char *cmd)
 		}
 
 		dirs = dirs->nxt;
-		free(temp);
+		free(tmp);
 	}
 
 	fre_lst(hd);
@@ -120,7 +120,7 @@ lst_t *g_path_dir(char *path)
 	if (!dirs)
 		return (NULL);
 
-	for (i = 0; dirs[idx]; idx++)
+	for (idx = 0; dirs[idx]; idx++)
 	{
 		if (add_nodeend(&hd, dirs[idx]) == NULL)
 		{
