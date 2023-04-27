@@ -33,7 +33,7 @@ int execute(char **ag, char **frnt)
 		cmd = g_location(cmd);
 	}
 
-	if (!cmd || (aces(cmd, F_OK) == -1))
+	if (!cmd || (acces(cmd, F_OK) == -1))
 	{
 		if (errno == EACCES)
 			retn = (cr_err(ag, 126));
@@ -96,7 +96,7 @@ int main(int ac, char *av[])
 
 	if (ac != 1)
 	{
-		retn = proc_fle_cmd(ag[1], ex_retn);
+		retn = proc_fle_cmd(av[1], ex_retn);
 		fre_env();
 		fre_alias_lst(alias);
 		return (*ex_retn);
@@ -115,7 +115,7 @@ int main(int ac, char *av[])
 	{
 		write(STDOUT_FILENO, pmpt, 2);
 		retn = hndl_ag(ex_retn);
-		if (retn == END_OF_FILE || ret == EXIT)
+		if (retn == END_OF_FILE || retn == EXIT)
 		{
 			if (retn == END_OF_FILE)
 				write(STDOUT_FILENO, n_lne, 1);
