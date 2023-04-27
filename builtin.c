@@ -21,9 +21,9 @@ int (*g_builtin(char *cmd))(char **ag, char **frnt)
 	};
 	int i;
 
-	for (i = 0; func[i].name; i++)
+	for (i = 0; func[i].nme; i++)
 	{
-		if (_strcmp(func[i].name, cmd) == 0)
+		if (_strcmp(func[i].nme, cmd) == 0)
 			break;
 	}
 	return (func[i].f);
@@ -58,7 +58,7 @@ int shell_cmd_exit(char **ag, char **frnt)
 			if (i <= ln_int && ag[0][i] >= '0' && ag[0][i] <= '9')
 				nmb = (nmb * 10) + (ag[0][i] - '0');
 			else
-				return (cr_error(--ag, 2));
+				return (cr_err(--ag, 2));
 		}
 	}
 	else
@@ -66,11 +66,11 @@ int shell_cmd_exit(char **ag, char **frnt)
 		return (-3);
 	}
 	if (nmb > max - 1)
-		return (cr_error(--ag, 2));
+		return (cr_err(--ag, 2));
 	ag -= 1;
 	fre_ag(ag, frnt);
 	fre_env();
-	fre_alias_lst(aliases);
+	fre_alias_lst(alias);
 	exit(nmb);
 }
 
@@ -106,7 +106,7 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 			else
 			{
 				free(o_pwd);
-				return (cr_error(ag, 2));
+				return (cr_err(ag, 2));
 			}
 		}
 		else
