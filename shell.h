@@ -20,14 +20,14 @@ char *nme;
 int hst;
 
 /**
- * struct list_s - A new struct define a linked list.
- * @dir: A current directory path.
- * @next: A pointer to next struct list_s.
+ * struct lst_s - new struct define a linked list.
+ * @dir: current directory path.
+ * @nxt: pointer to next struct lst_s.
  */
-typedef struct list_s
+typedef struct lst_s
 {
 	char *dir;
-	struct list_s *nxt;
+	struct lst_s *nxt;
 } list_t;
 
 /**
@@ -49,7 +49,7 @@ alias_t *alias;
 /**
  * struct builtin_s - new struct define built-in commands.
  * @name: name of the built-in command.
- * @f: function pointer to the builtin command's function.
+ * @f: function pointer to the built-in command's function.
  */
 typedef struct builtin_s
 {
@@ -97,8 +97,8 @@ ssize_t _getline(char **lpnt, size_t *n, FILE *r_stream);
 char **_strtok(char *lne, char *delim);
 char *_itoa(int nmb);
 
-int (*get_builtin(char *cmd))(char **ag, char **frnt);
-int shell_cmd_exit(char **ag, char **front);
+int (*g_builtin(char *cmd))(char **ag, char **frnt);
+int shell_cmd_exit(char **ag, char **frnt);
 int shell_cmd_setenv(char **ag, char __attribute__((__unused__)) **frnt);
 int shell_cmd_unsetenv(char **ag, char __attribute__((__unused__)) **frnt);
 int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
