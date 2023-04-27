@@ -1,69 +1,69 @@
 #include "shell.h"
 
 /**
- * error_126 - Creates an error message for permission denied failures.
- * @args: An array of arguments passed to the command.
+ * err_126 - func to create an error message for permission denied failures.
+ * @ag: An array of arguments passed to the command.
  *
- * Return: The error string.
+ * Return: The string error.
  */
-char *error_126(char **args)
+char *err_126(char **ag)
 {
-	char *error, *hist_str;
-	int len;
+	char *err, *hst_str;
+	int ln;
 
-	hist_str = _itoa(hist);
-	if (!hist_str)
+	hst_str = _itoa(hst);
+	if (!hst_str)
 		return (NULL);
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 24;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
+	ln = _strlen(nme) + _strlen(hst_str) + _strlen(ag[0]) + 24;
+	err = malloc(sizeof(char) * (ln + 1));
+	if (!err)
 	{
-		free(hist_str);
+		free(hst_str);
 		return (NULL);
 	}
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": Permission denied\n");
+	_strcpy(err, nme);
+	_strcat(err, ": ");
+	_strcat(err, hst_str);
+	_strcat(err, ": ");
+	_strcat(err, ag[0]);
+	_strcat(err, ": Permission Denied\n");
 
-	free(hist_str);
-	return (error);
+	free(hst_str);
+	return (err);
 }
 
 /**
- * error_127 - Creates an error message for command not found failures.
- * @args: An array of arguments passed to the command.
+ * err_127 - func to create an error message for command not found failures.
+ * @ag: array of arguments passed to the command.
  *
- * Return: The error string.
+ * Return: The string error.
  */
-char *error_127(char **args)
+char *err_127(char **ag)
 {
-	char *error, *hist_str;
-	int len;
+	char *err, *hst_str;
+	int ln;
 
-	hist_str = _itoa(hist);
-	if (!hist_str)
+	hst_str = _itoa(hst);
+	if (!hst_str)
 		return (NULL);
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 16;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
+	ln = _strlen(nme) + _strlen(hst_str) + _strlen(ag[0]) + 16;
+	err = malloc(sizeof(char) * (ln + 1));
+	if (!err)
 	{
-		free(hist_str);
+		free(hst_str);
 		return (NULL);
 	}
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": not found\n");
+	_strcpy(err, nme);
+	_strcat(err, ": ");
+	_strcat(err, hst_str);
+	_strcat(err, ": ");
+	_strcat(err, ag[0]);
+	_strcat(err, ": Not Found\n");
 
-	free(hist_str);
-	return (error);
+	free(hst_str);
+	return (err);
 }
