@@ -105,7 +105,7 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
 int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt);
 int shell_cmd_env(char **ag, char __attribute__((__unused__)) **frnt);
 void set_alias(char *var_nme, char *val);
-void print_alias(alias_t *alias);
+void pr_alias(alias_t *alias);
 int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
 
 
@@ -122,9 +122,9 @@ char *err_2_synt(char **ag);
 char *err_126(char **ag);
 char *err_127(char **ag);
 
-alias_t *add_alias_end(alias_t **hd, char *nme, char *val);
+alias_t *add_aliasend(alias_t **hd, char *nme, char *val);
 void fre_alias_list(alias_t *hd);
-list_t *add_node_end(list_t **hd, char *dir);
+list_t *add_nodeend(list_t **hd, char *dir);
 void fre_list(list_t *hd);
 
 
