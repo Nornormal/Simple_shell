@@ -33,7 +33,7 @@ int execute(char **ag, char **frnt)
 		cmd = g_location(cmd);
 	}
 
-	if (!cmd || (acces(cmd, F_OK) == -1))
+	if (!cmd || (access(cmd, F_OK) == -1))
 	{
 		if (errno == EACCES)
 			retn = (cr_err(ag, 126));
