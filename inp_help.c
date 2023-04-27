@@ -129,74 +129,74 @@ int run_ag(char **ag, char **frnt, int *ex_retn)
 }
 
 /**
- * handle_args - Gets, calls, and runs the execution of a command.
- * @exe_ret: The return value of the parent process' last executed command.
+ * hndl_ag - func to get, call and run the execution of a command.
+ * @ex_retn: The return value of the parent process' last executed command.
  *
- * Return: If an end-of-file is read - END_OF_FILE (-2).
- *         If the input cannot be tokenized - -1.
- *         O/w - The exit value of the last executed command.
+ * Return: END_OF_FILE (-2) when end-of-file is read.
+ *         -1 when the input cannot be tokenized.
+ *         or O/w - exit value of the last executed command.
  */
-int handle_args(int *exe_ret)
+int hndl_ag(int *ex_retn)
 {
-	int ret = 0, index;
-	char **args, *line = NULL, **front;
+	int retn = 0, idx;
+	char **ag, *lne = NULL, **frnt;
 
-	line = get_args(line, exe_ret);
-	if (!line)
+	lne = g_ag(lne, ex_retn);
+	if (!lne)
 		return (END_OF_FILE);
 
-	args = _strtok(line, " ");
-	free(line);
-	if (!args)
+	ag = _strtok(lne, " ");
+	free(lne);
+	if (!ag)
 		return (ret);
-	if (check_args(args) != 0)
+	if (check_ag(ag) != 0)
 	{
-		*exe_ret = 2;
-		free_args(args, args);
-		return (*exe_ret);
+		*ex_retn = 2;
+		free_ag(ag, ag);
+		return (*ex_retn);
 	}
-	front = args;
+	front = ag;
 
-	for (index = 0; args[index]; index++)
+	for (idx = 0; ag[idx]; idx++)
 	{
-		if (_strncmp(args[index], ";", 1) == 0)
+		if (_strncmp(ag[idx], ";", 1) == 0)
 		{
-			free(args[index]);
-			args[index] = NULL;
-			ret = call_args(args, front, exe_ret);
-			args = &args[++index];
-			index = 0;
+			free(ag[idx]);
+			ag[idx] = NULL;
+			ret = call_ag(ag, frnt, ex_retn);
+			ag = &ag[++idx];
+			idx = 0;
 		}
 	}
-	if (args)
-		ret = call_args(args, front, exe_ret);
+	if (ag)
+		retn = call_ag(ag, frnt, ex_retn);
 
-	free(front);
+	free(frnt);
 	return (ret);
 }
 
 /**
- * check_args - Checks if there are any leading ';', ';;', '&&', or '||'.
- * @args: 2D pointer to tokenized commands and arguments.
+ * check_ag - fun to check if there are any leading ';', ';;', '&&', or '||'.
+ * @ag: 2D pointer to tokenized commands and arguments.
  *
  * Return: If a ';', '&&', or '||' is placed at an invalid position - 2.
  *	   Otherwise - 0.
  */
-int check_args(char **args)
+int check_ag(char **ag)
 {
 	size_t i;
-	char *cur, *nex;
+	char *curr, *nxt;
 
-	for (i = 0; args[i]; i++)
+	for (i = 0; ag[i]; i++)
 	{
-		cur = args[i];
+		cur = ag[i];
 		if (cur[0] == ';' || cur[0] == '&' || cur[0] == '|')
 		{
 			if (i == 0 || cur[1] == ';')
-				return (create_error(&args[i], 2));
-			nex = args[i + 1];
+				return (create_error(&ag[i], 2));
+			nex = ag[i + 1];
 			if (nex && (nex[0] == ';' || nex[0] == '&' || nex[0] == '|'))
-				return (create_error(&args[i + 1], 2));
+				return (create_error(&ag[i + 1], 2));
 		}
 	}
 	return (0);
