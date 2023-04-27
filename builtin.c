@@ -80,7 +80,7 @@ int shellby_exit(char **ag, char **frnt)
 }
 
 /**
- * shell_cmd_cd - func that change the current directory.
+ * shellby_cd - func that change the current directory.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
  *
@@ -88,7 +88,7 @@ int shellby_exit(char **ag, char **frnt)
  *         -1 when an error occurs.
  *         else - 0.
  */
-int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
+int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt)
 {
 	char **dir_inf, *n_lne = "\n";
 	char *o_pwd = NULL, *pwd = NULL;
@@ -142,12 +142,12 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 
 	dir_inf[0] = "OLDPWD";
 	dir_inf[1] = o_pwd;
-	if (shell_cmd_setenv(dir_inf, dir_inf) == -1)
+	if (shellby_setenv(dir_inf, dir_inf) == -1)
 		return (-1);
 
 	dir_inf[0] = "PWD";
 	dir_inf[1] = pwd;
-	if (shell_cmd_setenv(dir_inf, dir_inf) == -1)
+	if (shellby_setenv(dir_inf, dir_inf) == -1)
 		return (-1);
 	if (ag[0] && ag[0][0] == '-' && ag[0][1] != '-')
 	{
@@ -161,14 +161,14 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 }
 
 /**
- * shell_cmd_hlp - function prints information about built-in shell_cmd commands.
+ * shellby_hlp - function prints information about built-in shellby commands.
  * @ag: array of arguments.
  * @frnt: pointer to the beginning of args.
  *
  * Return: -1 when error occurs.
  *         or - 0.
  */
-int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt)
+int shellby_hlp(char **ag, char __attribute__((__unused__)) **frnt)
 {
 	if (!ag[0])
 		hlp_all();
