@@ -10,7 +10,7 @@
 int (*g_builtin(char *cmd))(char **ag, char **frnt)
 {
 	builtin_t func[] = {
-		{ "exit", shell_cmd_exit },
+		{ "exit", shellby_exit },
 		{ "env", shell_cmd_env },
 		{ "setenv", shell_cmd_setenv },
 		{ "unsetenv", shell_cmd_unsetenv },
