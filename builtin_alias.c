@@ -56,7 +56,7 @@ int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt)
  */
 void st_alias(char *var_nme, char *val)
 {
-	alias_t *tmp = aliases;
+	alias_t *tmp = alias;
 	int ln, a, b;
 	char *n_val;
 
@@ -83,7 +83,7 @@ void st_alias(char *var_nme, char *val)
 		tmp = tmp->nxt;
 	}
 	if (!tmp)
-		add_aliasend(&aliases, var_nme, n_val);
+		add_aliasend(&alias, var_nme, n_val);
 }
 
 /**
