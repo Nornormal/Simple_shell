@@ -48,7 +48,7 @@ alias_t *alias;
 
 /**
  * struct builtin_s - new struct define built-in commands.
- * @name: name of the built-in command.
+ * @nme: name of the built-in command.
  * @f: function pointer to the built-in command's function.
  */
 typedef struct builtin_s
