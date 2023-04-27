@@ -41,7 +41,6 @@ void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size)
 		free(pnt);
 		return (NULL);
 	}
-
 	fill = memy;
 
 	for (idx = 0; idx < o_size && idx < n_size; idx++)
