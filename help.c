@@ -16,44 +16,44 @@ void fre_ag(char **ag, char **frnt)
 }
 
 /**
- * get_pid - Gets the current process ID.
- * Description: Opens the stat file, a space-delimited file containing
+ * g_pid - func to get the current process ID.
+ * Description: it opens the stat file, a space-delimited file containing
  *              information about the current process. The PID is the
  *              first word in the file. The function reads the PID into
  *              a buffer and replace the space at the end with a \0 byte.
  *
- * Return: The current process ID or NULL on failure.
+ * Return: current process ID or NULL on failure.
  */
-char *get_pid(void)
+char *g_pid(void)
 {
 	size_t i = 0;
-	char *buffer;
-	ssize_t file;
+	char *buf;
+	ssize_t fle;
 
-	file = open("/proc/self/stat", O_RDONLY);
-	if (file == -1)
+	fle = open("/proc/self/stat", O_RDONLY);
+	if (fle == -1)
 	{
-		perror("Cant read file");
+		perror("Cant Read File");
 		return (NULL);
 	}
-	buffer = malloc(120);
-	if (!buffer)
+	buf = malloc(120);
+	if (!buf)
 	{
-		close(file);
+		close(fle);
 		return (NULL);
 	}
-	read(file, buffer, 120);
-	while (buffer[i] != ' ')
+	read(fle, buf, 120);
+	while (buf[i] != ' ')
 		i++;
-	buffer[i] = '\0';
+	buf[i] = '\0';
 
-	close(file);
-	return (buffer);
+	close(fle);
+	return (buf);
 }
 
 /**
- * get_env_value - Gets the value corresponding to an environmental variable.
- * @beginning: The environmental variable to search for.
+ * g_env_val - Gets the value corresponding to an environmental variable.
+ * @begin: The environmental variable to search for.
  * @len: The length of the environmental variable to search for.
  *
  * Return: If the variable is not found - an empty string.
@@ -61,10 +61,10 @@ char *get_pid(void)
  *
  * Description: Variables are stored in the format VARIABLE=VALUE.
  */
-char *get_env_value(char *beginning, int len)
+char *g_env_val(char *begin, int ln)
 {
 	char **var_addr;
-	char *replacement = NULL, *temp, *var;
+	char *replace = NULL, *tmp, *var;
 
 	var = malloc(len + 1);
 	if (!var)
