@@ -117,7 +117,7 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 			else
 			{
 				free(o_pwd);
-				return (cr_error(ag, 2));
+				return (cr_err(ag, 2));
 			}
 		}
 	}
