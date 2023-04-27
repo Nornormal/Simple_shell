@@ -148,14 +148,14 @@ int hndl_ag(int *ex_retn)
 	ag = _strtok(lne, " ");
 	free(lne);
 	if (!ag)
-		return (ret);
+		return (retn);
 	if (check_ag(ag) != 0)
 	{
 		*ex_retn = 2;
-		free_ag(ag, ag);
+		fre_ag(ag, ag);
 		return (*ex_retn);
 	}
-	front = ag;
+	frnt = ag;
 
 	for (idx = 0; ag[idx]; idx++)
 	{
@@ -163,7 +163,7 @@ int hndl_ag(int *ex_retn)
 		{
 			free(ag[idx]);
 			ag[idx] = NULL;
-			ret = call_ag(ag, frnt, ex_retn);
+			retn = call_ag(ag, frnt, ex_retn);
 			ag = &ag[++idx];
 			idx = 0;
 		}
@@ -172,15 +172,15 @@ int hndl_ag(int *ex_retn)
 		retn = call_ag(ag, frnt, ex_retn);
 
 	free(frnt);
-	return (ret);
+	return (retn);
 }
 
 /**
  * check_ag - fun to check if there are any leading ';', ';;', '&&', or '||'.
  * @ag: 2D pointer to tokenized commands and arguments.
  *
- * Return: If a ';', '&&', or '||' is placed at an invalid position - 2.
- *	   Otherwise - 0.
+ * Return: 2- when a ';', '&&', or '||' is placed at an invalid position.
+ *	   or - 0.
  */
 int check_ag(char **ag)
 {
