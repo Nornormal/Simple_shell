@@ -9,7 +9,7 @@
  * Return: -1 when error occurs.
  *         or - 0.
  */
-int shellby_alias(char **ag, char __attribute__((__unused__)) **frnt)
+int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt)
 {
 	alias_t *tmp = alias;
 	int i, retn = 0;
