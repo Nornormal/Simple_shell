@@ -50,7 +50,7 @@ alias_t *add_aliasend(alias_t **hd, char *nme, char *val)
  */
 lst_t *add_nodeend(lst_t **hd, char *dir)
 {
-	lst_t *nw_node = malloc(sizeof(lst_t));
+	lst_t *n_node = malloc(sizeof(lst_t));
 	lst_t *last;
 
 	if (!n_node)
