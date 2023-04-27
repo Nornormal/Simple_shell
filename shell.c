@@ -6,11 +6,11 @@
  */
 void sg_hndl(int sg)
 {
-	char *new_prompt = "\n$ ";
+	char *n_pmpt = "\n$ ";
 
 	(void)sg;
 	signal(SIGINT, sg_hndl);
-	write(STDIN_FILENO, n_mpt, 3);
+	write(STDIN_FILENO, n_pmpt, 3);
 }
 
 /**
@@ -35,7 +35,7 @@ int execute(char **ag, char **frnt)
 
 	if (!cmd || (aces(cmd, F_OK) == -1))
 	{
-		if (err_no == EACCES)
+		if (errno == EACCES)
 			retn = (cr_err(ag, 126));
 		else
 			retn = (cr_err(ag, 127));
@@ -53,10 +53,10 @@ int execute(char **ag, char **frnt)
 		if (ch_pid == 0)
 		{
 			execve(cmd, ag, environ);
-			if (err_no == EACCES)
+			if (errno == EACCES)
 				retn = (cr_err(ag, 126));
 			fre_env();
-			fre_args(ag, frnt);
+			fre_ag(ag, frnt);
 			fre_alias_lst(alias);
 			_exit(retn);
 		}
@@ -96,7 +96,7 @@ int main(int ac, char *av[])
 
 	if (ac != 1)
 	{
-		retn = proc_fle_cmd(argv[1], ex_retn);
+		retn = proc_fle_cmd(ag[1], ex_retn);
 		fre_env();
 		fre_alias_lst(alias);
 		return (*ex_retn);
@@ -114,13 +114,13 @@ int main(int ac, char *av[])
 	while (1)
 	{
 		write(STDOUT_FILENO, pmpt, 2);
-		ret = hndl_ag(ex_retn);
+		retn = hndl_ag(ex_retn);
 		if (retn == END_OF_FILE || ret == EXIT)
 		{
 			if (retn == END_OF_FILE)
 				write(STDOUT_FILENO, n_lne, 1);
 			fre_env();
-			fre_alias_lst(aliases);
+			fre_alias_lst(alias);
 			exit(*ex_retn);
 		}
 	}
