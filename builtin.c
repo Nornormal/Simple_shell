@@ -94,7 +94,7 @@ int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt)
 	char *o_pwd = NULL, *pwd = NULL;
 	struct stat dir;
 
-	o_pwd = get_cwd(o_pwd, 0);
+	o_pwd = getcwd(o_pwd, 0);
 	if (!o_pwd)
 		return (-1);
 
@@ -132,7 +132,7 @@ int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt)
 			chdir(*(_getenv("HOME")) + 5);
 	}
 
-	pwd = get_cwd(pwd, 0);
+	pwd = getcwd(pwd, 0);
 	if (!pwd)
 		return (-1);
 
