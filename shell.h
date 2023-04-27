@@ -111,7 +111,7 @@ int shell_cmd_env(char **ag, char __attribute__((__unused__)) **frnt);
 void set_alias(char *var_nme, char *val);
 void pr_alias(alias_t *alias);
 int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
-
+char *g_env_val(char *begin, int ln);
 
 char **_cpenv(void);
 void fre_env(void);
