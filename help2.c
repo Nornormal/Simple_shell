@@ -18,8 +18,8 @@ void hndl_lne(char **lne, ssize_t rread)
 	n_ln = g_n_ln(*lne);
 	if (n_ln == rread - 1)
 		return;
-	n_lne = malloc(nw_ln + 1);
-	if (!nw_lne)
+	n_lne = malloc(n_ln + 1);
+	if (!n_lne)
 		return;
 	j = 0;
 	o_lne = *lne;
@@ -144,11 +144,11 @@ ssize_t g_n_ln(char *lne)
 		else if (curr == ';')
 		{
 			if (i != 0 && lne[i - 1] != ' ')
-				nw_ln++;
+				n_ln++;
 			if (nxt != ' ' && nxt != ';')
 				n_ln++;
 		}
-		ne_ln++;
+		n_ln++;
 	}
 	return (n_ln);
 }
