@@ -57,7 +57,7 @@ int execute(char **ag, char **frnt)
 				retn = (cr_err(ag, 126));
 			fre_env();
 			fre_args(ag, frnt);
-			fre_alias_list(alias);
+			fre_alias_lst(alias);
 			_exit(retn);
 		}
 		else
@@ -98,7 +98,7 @@ int main(int ac, char *av[])
 	{
 		retn = proc_fle_cmd(argv[1], ex_retn);
 		fre_env();
-		fre_alias_list(alias);
+		fre_alias_lst(alias);
 		return (*ex_retn);
 	}
 
@@ -107,7 +107,7 @@ int main(int ac, char *av[])
 		while (retn != END_OF_FILE && retn != EXIT)
 			retn = hndl_ag(ex_retn);
 		fre_env();
-		fre_alias_list(alias);
+		fre_alias_lst(alias);
 		return (*ex_retn);
 	}
 
@@ -120,12 +120,12 @@ int main(int ac, char *av[])
 			if (retn == END_OF_FILE)
 				write(STDOUT_FILENO, n_lne, 1);
 			fre_env();
-			fre_alias_list(aliases);
+			fre_alias_lst(aliases);
 			exit(*ex_retn);
 		}
 	}
 
 	fre_env();
-	fre_alias_list(alias);
+	fre_alias_lst(alias);
 	return (*ex_retn);
 }
