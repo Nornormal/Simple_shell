@@ -2,7 +2,7 @@
 
 /**
  * sg_hndl - func print a new prompt signal.
- * @sig: signal.
+ * @sg: signal.
  */
 void sg_hndl(int sg)
 {
@@ -73,8 +73,8 @@ int execute(char **ag, char **frnt)
 
 /**
  * main - func display simple UNIX command.
- * @argc: number of arguments supplied to the program.
- * @argv: array of pointers to the arguments.
+ * @ag: number of arguments supplied to the program.
+ * @ag: array of pointers to the arguments.
  *
  * Return: value of executed command.
  */
