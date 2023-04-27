@@ -52,7 +52,7 @@ void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size)
 }
 
 /**
- * chg_lpnt - function that change the line poinet variable for _getline.
+ * chg_lpnt - function that change line point variable for _getline.
  * @lpnt: buffer storing the input string.
  * @n: size of lpnt.
  * @buf: string to changed to @lpnt.
@@ -84,9 +84,9 @@ void chg_lpnt(char **lpnt, size_t *n, char *buf, size_t bsize)
 }
 
 /**
- * _getline - Reads input from a stream.
+ * _getline - function that read input from a stream.
  * @lpnt: buffer storing the input string.
- * @n: size of lpnt.
+ * @n: size of @lpnt.
  * @r_stream: The stream read.
  *
  * Return: number of bytes read.
