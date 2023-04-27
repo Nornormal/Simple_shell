@@ -58,7 +58,7 @@ char **_strtok(char *lne, char *delim)
 	char **pnt;
 	int idx = 0, tok, t, letter, l;
 
-	tok = cnt_tok(line, delim);
+	tok = cnt_tok(lne, delim);
 	if (tok == 0)
 		return (NULL);
 
