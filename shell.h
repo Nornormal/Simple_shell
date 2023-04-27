@@ -94,6 +94,7 @@ int execute(char **ag, char **frnt);
 void fre_list(list_t *hd);
 void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size);
 ssize_t _getline(char **lpnt, size_t *n, FILE *r_stream);
+void chg_lpnt(char **lpnt, size_t *n, char *buf, size_t bsize);
 char **_strtok(char *lne, char *delim);
 char *_itoa(int nmb);
 
