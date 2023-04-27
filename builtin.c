@@ -1,13 +1,13 @@
 #include "shell.h"
 
 int (*g_builtin(char *cmd))(char **ag, char **frnt);
-int shellby_hlp(char **ag, char __attribute__((__unused__)) **frnt);
-int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt);
-int shellby_exit(char **ag, char **frnt);
+int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
+int shell_cmd_exit(char **ag, char **frnt);
 
 /**
  * g_builtin - function that matches a command with a corresponding
- *               shellby built-in function.
+ *               shell_cmd built-in function.
  * @cmd: command to match.
  *
  * Return: function pointer to the built-in corresponding.
@@ -15,13 +15,13 @@ int shellby_exit(char **ag, char **frnt);
 int (*g_builtin(char *cmd))(char **ag, char **frnt)
 {
 	builtin_t funcs[] = {
-		{ "exit", shellby_exit },
-		{ "env", shellby_env },
-		{ "setenv", shellby_setenv },
-		{ "unsetenv", shellby_unsetenv },
-		{ "cd", shellby_cd },
-		{ "alias", shellby_alias },
-		{ "help", shellby_hlp },
+		{ "exit", shell_cmd_exit },
+		{ "env", shell_cmd_env },
+		{ "setenv", shell_cmd_setenv },
+		{ "unsetenv", shell_cmd_unsetenv },
+		{ "cd", shell_cmd_cd },
+		{ "alias", shell_cmd_alias },
+		{ "help", shell_cmd_hlp },
 		{ NULL, NULL }
 	};
 	int i;
@@ -35,8 +35,8 @@ int (*g_builtin(char *cmd))(char **ag, char **frnt)
 }
 
 /**
- * shellby_exit - function that cause normal process termination
- *                for the shellby shell.
+ * shell_cmd_exit - function that cause normal process termination
+ *                for the shell_cmd shell.
  * @ag: array of arguments contain the exit value.
  * @frnt: pointer to pointer to the beginning of ag.
  *
@@ -46,7 +46,7 @@ int (*g_builtin(char *cmd))(char **ag, char **frnt)
  *
  * Description: when returning -3, program exits back to main function.
  */
-int shellby_exit(char **ag, char **frnt)
+int shell_cmd_exit(char **ag, char **frnt)
 {
 	int i, ln_int = 10;
 	unsigned int nmb = 0, max = 1 << (sizeof(int) * 8 - 1);
@@ -80,7 +80,7 @@ int shellby_exit(char **ag, char **frnt)
 }
 
 /**
- * shellby_cd - func that change the current directory.
+ * shell_cmd_cd - func that change the current directory.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
  *
@@ -88,7 +88,7 @@ int shellby_exit(char **ag, char **frnt)
  *         -1 when an error occurs.
  *         else - 0.
  */
-int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt)
+int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 {
 	char **dir_inf, *n_lne = "\n";
 	char *o_pwd = NULL, *pwd = NULL;
@@ -142,12 +142,12 @@ int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt)
 
 	dir_inf[0] = "OLDPWD";
 	dir_inf[1] = o_pwd;
-	if (shellby_setenv(dir_inf, dir_inf) == -1)
+	if (shell_cmd_setenv(dir_inf, dir_inf) == -1)
 		return (-1);
 
 	dir_inf[0] = "PWD";
 	dir_inf[1] = pwd;
-	if (shellby_setenv(dir_inf, dir_inf) == -1)
+	if (shell_cmd_setenv(dir_inf, dir_inf) == -1)
 		return (-1);
 	if (ag[0] && ag[0][0] == '-' && ag[0][1] != '-')
 	{
@@ -161,14 +161,14 @@ int shellby_cd(char **ag, char __attribute__((__unused__)) **frnt)
 }
 
 /**
- * shellby_hlp - function prints information about built-in shellby commands.
+ * shell_cmd_hlp - function prints information about built-in shell_cmd commands.
  * @ag: array of arguments.
  * @frnt: pointer to the beginning of args.
  *
  * Return: -1 when error occurs.
  *         or - 0.
  */
-int shellby_hlp(char **ag, char __attribute__((__unused__)) **frnt)
+int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt)
 {
 	if (!ag[0])
 		hlp_all();
