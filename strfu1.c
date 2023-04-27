@@ -37,7 +37,7 @@ char *_strcat(char *dest, const char *src)
 		destTmp++;
 
 	while (*srcTmp != '\0')
-		*destTmp++ = *srcTemp++;
+		*destTmp++ = *srcTmp++;
 	*destTmp = '\0';
 	return (dest);
 }
