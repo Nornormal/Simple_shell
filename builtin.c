@@ -3,7 +3,7 @@
 /**
  * g_builtin - function that matches a command with a corresponding
  *               shell_cmd built-in function.
- * @command: command to match.
+ * @cmd: command to match.
  *
  * Return: function pointer to the built-in corresponding.
  */
@@ -75,7 +75,7 @@ int shell_cmd_exit(char **ag, char **frnt)
 }
 
 /**
- * shell_cmd_cd - function that change the current directory of the shell_cmd process.
+ * shell_cmd_cd - func that change the current directory.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
  *
