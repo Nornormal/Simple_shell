@@ -1,53 +1,53 @@
 #include "shell.h"
 
 /**
- * get_location - Locates a command in the PATH.
- * @command: The command to locate.
+ * g_location - func locate a command PATH.
+ * @cmd: command to locate.
  *
- * Return: If an error occurs or the command cannot be located - NULL.
- *         Otherwise - the full pathname of the command.
+ * Return: NULL- if error occur or command cannot found.
+ *         Or - pathname of the command.
  */
-char *get_location(char *command)
+char *g_location(char *cmd)
 {
-	char **path, *temp;
-	list_t *dirs, *head;
+	char **path, *tmp;
+	lst_t *dirs, *hd;
 	struct stat st;
 
 	path = _getenv("PATH");
 	if (!path || !(*path))
 		return (NULL);
 
-	dirs = get_path_dir(*path + 5);
-	head = dirs;
+	dirs = g_path_dir(*path + 5);
+	hd = dirs;
 
 	while (dirs)
 	{
-		temp = malloc(_strlen(dirs->dir) + _strlen(command) + 2);
-		if (!temp)
+		tmp = malloc(_strlen(dirs->dir) + _strlen(cmd) + 2);
+		if (!tmp)
 			return (NULL);
 
-		_strcpy(temp, dirs->dir);
-		_strcat(temp, "/");
-		_strcat(temp, command);
+		_strcpy(tmp, dirs->dir);
+		_strcat(tmp, "/");
+		_strcat(tmp, cmd);
 
-		if (stat(temp, &st) == 0)
+		if (stat(tmp, &st) == 0)
 		{
-			free_list(head);
-			return (temp);
+			fre_lst(hd);
+			return (tmp);
 		}
 
-		dirs = dirs->next;
+		dirs = dirs->nxt;
 		free(temp);
 	}
 
-	free_list(head);
+	fre_lst(hd);
 
 	return (NULL);
 }
 
 /**
- * fill_path_dir - Copies path but also replaces leading/sandwiched/trailing
- *		   colons (:) with current working directory.
+ * fill_path_dir - func Copy path + also replaces colons (:) with 
+ * 	current working directory.
  * @path: The colon-separated list of directories.
  *
  * Return: A copy of path with any leading/sandwiched/trailing colons replaced
@@ -55,8 +55,8 @@ char *get_location(char *command)
  */
 char *fill_path_dir(char *path)
 {
-	int i, length = 0;
-	char *path_copy, *pwd;
+	int i, lgth = 0;
+	char *path_cp, *pwd;
 
 	pwd = *(_getenv("PWD")) + 4;
 	for (i = 0; path[i]; i++)
@@ -64,68 +64,67 @@ char *fill_path_dir(char *path)
 		if (path[i] == ':')
 		{
 			if (path[i + 1] == ':' || i == 0 || path[i + 1] == '\0')
-				length += _strlen(pwd) + 1;
+				lgth += _strlen(pwd) + 1;
 			else
-				length++;
+				lgth++;
 		}
 		else
-			length++;
+			lgth++;
 	}
-	path_copy = malloc(sizeof(char) * (length + 1));
-	if (!path_copy)
+	path_cp = malloc(sizeof(char) * (lgth + 1));
+	if (!path_cp)
 		return (NULL);
-	path_copy[0] = '\0';
+	path_cp[0] = '\0';
 	for (i = 0; path[i]; i++)
 	{
 		if (path[i] == ':')
 		{
 			if (i == 0)
 			{
-				_strcat(path_copy, pwd);
-				_strcat(path_copy, ":");
+				_strcat(path_cp, pwd);
+				_strcat(path_cp, ":");
 			}
 			else if (path[i + 1] == ':' || path[i + 1] == '\0')
 			{
-				_strcat(path_copy, ":");
-				_strcat(path_copy, pwd);
+				_strcat(path_cp, ":");
+				_strcat(path_cp, pwd);
 			}
 			else
-				_strcat(path_copy, ":");
+				_strcat(path_cp, ":");
 		}
 		else
 		{
-			_strncat(path_copy, &path[i], 1);
+			_strncat(path_cp, &path[i], 1);
 		}
 	}
-	return (path_copy);
+	return (path_cp);
 }
 
 /**
- * get_path_dir - Tokenizes a colon-separated list of
- *                directories into a list_s linked list.
+ * g_path_dir - func tokenize a colon-separates list of directories
  * @path: The colon-separated list of directories.
  *
- * Return: A pointer to the initialized linked list.
+ * Return: pointer to the first linked list.
  */
-list_t *get_path_dir(char *path)
+lst_t *g_path_dir(char *path)
 {
-	int index;
-	char **dirs, *path_copy;
-	list_t *head = NULL;
+	int idx;
+	char **dirs, *path_cp;
+	lst_t *hd = NULL;
 
-	path_copy = fill_path_dir(path);
-	if (!path_copy)
+	path_cp = fill_path_dir(path);
+	if (!path_cp)
 		return (NULL);
-	dirs = _strtok(path_copy, ":");
-	free(path_copy);
+	dirs = _strtok(path_cp, ":");
+	free(path_cp);
 	if (!dirs)
 		return (NULL);
 
-	for (index = 0; dirs[index]; index++)
+	for (i = 0; dirs[idx]; idx++)
 	{
-		if (add_node_end(&head, dirs[index]) == NULL)
+		if (add_nodeend(&hd, dirs[idx]) == NULL)
 		{
-			free_list(head);
+			fre_lst(hd);
 			free(dirs);
 			return (NULL);
 		}
@@ -133,5 +132,5 @@ list_t *get_path_dir(char *path)
 
 	free(dirs);
 
-	return (head);
+	return (hd);
 }
