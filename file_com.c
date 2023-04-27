@@ -97,7 +97,7 @@ int proc_fle_cmd(char *f_path, int *ex_retn)
 	if (check_ag(ag) != 0)
 	{
 		*ex_retn = 2;
-		fre_ag(g, g);
+		fre_ag(ag, ag);
 		return (*ex_retn);
 	}
 	frnt = ag;
