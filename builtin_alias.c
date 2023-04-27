@@ -62,13 +62,13 @@ void st_alias(char *var_nme, char *val)
 
 	*val = '\0';
 	val++;
-	len = _strlen(val) - _strspn(val, "'\"");
+	ln = _strlen(val) - _strspn(val, "'\"");
 	n_val = malloc(sizeof(char) * (ln + 1));
 	if (!n_val)
 		return;
 	for (a = 0, b = 0; val[a]; a++)
 	{
-		if (val[j] != '\'' && val[a] != '"')
+		if (val[a] != '\'' && val[a] != '"')
 			n_val[b++] = val[a];
 	}
 	n_val[b] = '\0';
@@ -131,7 +131,7 @@ char **rep_alias(char **ag)
 				n_val = malloc(sizeof(char) * (_strlen(tmp->val) + 1));
 				if (!n_val)
 				{
-					free_ag(ag, ag);
+					fre_ag(ag, ag);
 					return (NULL);
 				}
 				_strcpy(n_val, tmp->val);
