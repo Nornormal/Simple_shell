@@ -14,7 +14,7 @@ int shell_cmd_exit(char **ag, char **frnt);
  */
 int (*g_builtin(char *cmd))(char **ag, char **frnt)
 {
-	builtin_t func[] = {
+	builtin_t funcs[] = {
 		{ "exit", shell_cmd_exit },
 		{ "env", shell_cmd_env },
 		{ "setenv", shell_cmd_setenv },
@@ -26,12 +26,12 @@ int (*g_builtin(char *cmd))(char **ag, char **frnt)
 	};
 	int i;
 
-	for (i = 0; func[i].nme; i++)
+	for (i = 0; funcs[i].nme; i++)
 	{
-		if (_strcmp(func[i].nme, cmd) == 0)
+		if (_strcmp(funcs[i].nme, cmd) == 0)
 			break;
 	}
-	return (func[i].f);
+	return (funcs[i].f);
 }
 
 /**
