@@ -1,27 +1,10 @@
 #include "shell.h"
 
-/**
- * _strlen - Returns the length of a string.
- * @s: A pointer to the characters string.
- *
- * Return: The length of the character string.
- */
-int _strlen(const char *s)
-{
-	int length = 0;
-
-	if (!s)
-		return (length);
-	for (length = 0; s[length]; length++)
-		;
-	return (length);
-}
 
 /**
- * _strcpy - Copies the string pointed to by src, including the
- *           terminating null byte, to the buffer pointed by des.
- * @dest: Pointer to the destination of copied string.
- * @src: Pointer to the src of the source string.
+ * _strcpy - copy the string pointed to by src.
+ * @dest: a pointer to the destination string.
+ * @src: a pointer to the the source string.
  *
  * Return: Pointer to dest.
  */
@@ -37,45 +20,62 @@ char *_strcpy(char *dest, const char *src)
 
 /**
  * _strcat - Concantenates two strings.
- * @dest: Pointer to destination string.
- * @src: Pointer to source string.
+ * @dest: a pointer to destination string.
+ * @src: a pointer to source string.
  *
- * Return: Pointer to destination string.
+ * Return: Pointer to destination.
  */
 char *_strcat(char *dest, const char *src)
 {
-	char *destTemp;
-	const char *srcTemp;
+	char *destTmp;
+	const char *srcTmp;
 
-	destTemp = dest;
-	srcTemp =  src;
+	destTmp = dest;
+	srcTmp =  src;
 
-	while (*destTemp != '\0')
-		destTemp++;
+	while (*destTmp != '\0')
+		destTmp++;
 
-	while (*srcTemp != '\0')
-		*destTemp++ = *srcTemp++;
-	*destTemp = '\0';
+	while (*srcTmp != '\0')
+		*destTmp++ = *srcTemp++;
+	*destTmp = '\0';
 	return (dest);
 }
 
 /**
  * _strncat - Concantenates two strings where n number
- *            of bytes are copied from source.
- * @dest: Pointer to destination string.
- * @src: Pointer to source string.
- * @n: n bytes to copy from src.
+ *            of byte from source.
+ * @dest: a pointer to destination string.
+ * @src: a pointer to source string.
+ * @n: no of byte to copy from src.
  *
  * Return: Pointer to destination string.
  */
 char *_strncat(char *dest, const char *src, size_t n)
 {
-	size_t dest_len = _strlen(dest);
+	size_t dest_ln = _strlen(dest);
 	size_t i;
 
 	for (i = 0; i < n && src[i] != '\0'; i++)
-		dest[dest_len + i] = src[i];
-	dest[dest_len + i] = '\0';
+		dest[dest_ln + i] = src[i];
+	dest[dest_ln + i] = '\0';
 
 	return (dest);
+}
+
+/**
+ * _strlen - calcu length of a string.
+ * @s: pointer to char string.
+ *
+ * Return: length of char string.
+ */
+int _strlen(const char *s)
+{
+	int lgth = 0;
+
+	if (!s)
+		return (lgth);
+	for (lgth = 0; s[lgth]; lgth++)
+		;
+	return (lgth);
 }
