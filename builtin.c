@@ -106,7 +106,7 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 					ag[0][1] == '\0')
 			{
 				if (_getenv("OLDPWD") != NULL)
-					(ch_dir(*_getenv("OLDPWD") + 7));
+					(chdir(*_getenv("OLDPWD") + 7));
 			}
 			else
 			{
@@ -118,7 +118,7 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 		{
 			if (stat(ag[0], &dir) == 0 && S_ISDIR(dir.st_mode)
 					&& ((dir.st_mode & S_IXUSR) != 0))
-				ch_dir(ag[0]);
+				chdir(ag[0]);
 			else
 			{
 				free(o_pwd);
@@ -129,7 +129,7 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 	else
 	{
 		if (_getenv("HOME") != NULL)
-			ch_dir(*(_getenv("HOME")) + 5);
+			chdir(*(_getenv("HOME")) + 5);
 	}
 
 	pwd = g_cwd(pwd, 0);
