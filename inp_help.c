@@ -94,38 +94,38 @@ int call_ag(char **ag, char **frnt, int *ex_retn)
 }
 
 /**
- * run_args - Calls the execution of a command.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
- * @exe_ret: The return value of the parent process' last executed command.
+ * run_ag - func to call the execution of a command.
+ * @ag: array of arguments.
+ * @frnt: pointer to pointer to the beginning of args.
+ * @ex_retn: return value of the parent process' last executed command.
  *
  * Return: The return value of the last executed command.
  */
-int run_args(char **args, char **front, int *exe_ret)
+int run_ag(char **ag, char **frnt, int *ex_retn)
 {
-	int ret, i;
-	int (*builtin)(char **args, char **front);
+	int retn, i;
+	int (*builtin)(char **ag, char **frnt);
 
-	builtin = get_builtin(args[0]);
+	builtin = get_builtin(ag[0]);
 
 	if (builtin)
 	{
-		ret = builtin(args + 1, front);
-		if (ret != EXIT)
-			*exe_ret = ret;
+		retn = builtin(ag + 1, frnt);
+		if (retn != EXIT)
+			*ex_retn = retn;
 	}
 	else
 	{
-		*exe_ret = execute(args, front);
-		ret = *exe_ret;
+		*ex_retn = execute(ag, frnt);
+		retn = *ex_retn;
 	}
 
-	hist++;
+	hst++;
 
-	for (i = 0; args[i]; i++)
-		free(args[i]);
+	for (i = 0; ag[i]; i++)
+		free(ag[i]);
 
-	return (ret);
+	return (retn);
 }
 
 /**
