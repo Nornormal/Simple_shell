@@ -1,131 +1,131 @@
 #include "shell.h"
 
 /**
- * sig_handler - Prints a new prompt upon a signal.
- * @sig: The signal.
+ * sg_hndl - func print a new prompt signal.
+ * @sig: signal.
  */
-void sig_handler(int sig)
+void sg_hndl(int sg)
 {
 	char *new_prompt = "\n$ ";
 
-	(void)sig;
-	signal(SIGINT, sig_handler);
-	write(STDIN_FILENO, new_prompt, 3);
+	(void)sg;
+	signal(SIGINT, sg_hndl);
+	write(STDIN_FILENO, n_mpt, 3);
 }
 
 /**
- * execute - Executes a command in a child process.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * execute - func execute a command in process.
+ * @ag: array of arguments.
+ * @frnt: pointer to pointer the beginning of args.
  *
- * Return: If an error occurs - a corresponding error code.
- *         O/w - The exit value of the last executed command.
+ * Return: error occur - a corresponding error code.
+ *         O/w - exit value of the last command.
  */
-int execute(char **args, char **front)
+int execute(char **ag, char **frnt)
 {
-	pid_t child_pid;
-	int status, flag = 0, ret = 0;
-	char *command = args[0];
+	pid_t ch_pid;
+	int status, flag = 0, retn = 0;
+	char *cmd = ag[0];
 
-	if (command[0] != '/' && command[0] != '.')
+	if (cmd[0] != '/' && cmd[0] != '.')
 	{
 		flag = 1;
-		command = get_location(command);
+		cmd = g_location(cmd);
 	}
 
-	if (!command || (access(command, F_OK) == -1))
+	if (!cmd || (aces(cmd, F_OK) == -1))
 	{
-		if (errno == EACCES)
-			ret = (create_error(args, 126));
+		if (err_no == EACCES)
+			retn = (cr_err(ag, 126));
 		else
-			ret = (create_error(args, 127));
+			retn = (cr_err(ag, 127));
 	}
 	else
 	{
-		child_pid = fork();
-		if (child_pid == -1)
+		ch_pid = fork();
+		if (ch_pid == -1)
 		{
 			if (flag)
-				free(command);
-			perror("Error child:");
+				free(cmd);
+			perror("error child:");
 			return (1);
 		}
-		if (child_pid == 0)
+		if (ch_pid == 0)
 		{
-			execve(command, args, environ);
-			if (errno == EACCES)
-				ret = (create_error(args, 126));
-			free_env();
-			free_args(args, front);
-			free_alias_list(aliases);
-			_exit(ret);
+			execve(cmd, ag, environ);
+			if (err_no == EACCES)
+				retn = (cr_err(ag, 126));
+			fre_env();
+			fre_args(ag, frnt);
+			fre_alias_list(alias);
+			_exit(retn);
 		}
 		else
 		{
 			wait(&status);
-			ret = WEXITSTATUS(status);
+			retn = WEXITSTATUS(status);
 		}
 	}
 	if (flag)
-		free(command);
-	return (ret);
+		free(cmd);
+	return (retn);
 }
 
 /**
- * main - Runs a simple UNIX command interpreter.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
+ * main - func display simple UNIX command.
+ * @argc: number of arguments supplied to the program.
+ * @argv: array of pointers to the arguments.
  *
- * Return: The return value of the last executed command.
+ * Return: value of executed command.
  */
-int main(int argc, char *argv[])
+int main(int ac, char *av[])
 {
-	int ret = 0, retn;
-	int *exe_ret = &retn;
-	char *prompt = "$ ", *new_line = "\n";
+	int retn = 0, nret;
+	int *ex_retn = &nret;
+	char *pmpt = "$ ", *n_lne = "\n";
 
-	name = argv[0];
-	hist = 1;
-	aliases = NULL;
-	signal(SIGINT, sig_handler);
+	nme = av[0];
+	hst = 1;
+	alias = NULL;
+	signal(SIGINT, sg_hndl);
 
-	*exe_ret = 0;
-	environ = _copyenv();
+	*ex_retn = 0;
+	environ = _cpenv();
 	if (!environ)
 		exit(-100);
 
-	if (argc != 1)
+	if (ac != 1)
 	{
-		ret = proc_file_commands(argv[1], exe_ret);
-		free_env();
-		free_alias_list(aliases);
-		return (*exe_ret);
+		retn = proc_fle_cmd(argv[1], ex_retn);
+		fre_env();
+		fre_alias_list(alias);
+		return (*ex_retn);
 	}
 
 	if (!isatty(STDIN_FILENO))
 	{
-		while (ret != END_OF_FILE && ret != EXIT)
-			ret = handle_args(exe_ret);
-		free_env();
-		free_alias_list(aliases);
-		return (*exe_ret);
+		while (retn != END_OF_FILE && retn != EXIT)
+			retn = hndl_ag(ex_retn);
+		fre_env();
+		fre_alias_list(alias);
+		return (*ex_retn);
 	}
 
 	while (1)
 	{
-		write(STDOUT_FILENO, prompt, 2);
-		ret = handle_args(exe_ret);
-		if (ret == END_OF_FILE || ret == EXIT)
+		write(STDOUT_FILENO, pmpt, 2);
+		ret = hndl_ag(ex_retn);
+		if (retn == END_OF_FILE || ret == EXIT)
 		{
-			if (ret == END_OF_FILE)
-				write(STDOUT_FILENO, new_line, 1);
-			free_env();
-			free_alias_list(aliases);
-			exit(*exe_ret);
+			if (retn == END_OF_FILE)
+				write(STDOUT_FILENO, n_lne, 1);
+			fre_env();
+			fre_alias_list(aliases);
+			exit(*ex_retn);
 		}
 	}
 
-	free_env();
-	free_alias_list(aliases);
-	return (*exe_ret);
+	fre_env();
+	fre_alias_list(alias);
+	return (*ex_retn);
 }
