@@ -57,14 +57,14 @@ typedef struct builtin_s
 	char *nme;
 } builtin_t;
 
-void handle_lne(char **lne, ssize_t rread);
+void hndl_lne(char **lne, ssize_t rread);
 ssize_t g_n_ln(char *lne);
 void logic_op(char *lne, ssize_t *n_len);
 void var_replace(char **ag, int *ex_retn);
 char *g_ag(char *lne, int *ex_retn);
 int call_ag(char **ag, char **frnt, int *ex_retn);
 int run_ag(char **ag, char **frnt, int *ex_retn);
-int handle_ag(int *ex_retn);
+int hndl_ag(int *ex_retn);
 int check_ag(char **ag);
 void fre_ag(char **ag, char **frnt);
 char **rep_alias(char **ag);
@@ -90,6 +90,7 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 
 char *g_location(char *cmd);
 list_t *g_path_dir(char *path);
+void sg_hndl(int sg);
 int execute(char **ag, char **frnt);
 void fre_list(list_t *hd);
 void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size);
@@ -130,6 +131,6 @@ void fre_alias_list(alias_t *hd);
 list_t *add_nodeend(list_t **hd, char *dir);
 void fre_list(list_t *hd);
 
-
+int cant_opn(char *f_path);
 int proc_fle_cmd(char *f_path, int *ex_retn);
 #endif /* _SHELL_H_ */
