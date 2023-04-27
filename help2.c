@@ -1,50 +1,50 @@
 #include "shell.h"
 
 /**
- * handle_line - Partitions a line read from standard input as needed.
- * @line: A pointer to a line read from standard input.
- * @read: The length of line.
+ * hndl_lne - func to partitions a line read from a standard input as needed.
+ * @lne: pointer to a line read from standard input.
+ * @rread: length of line.
  *
- * Description: Spaces are inserted to separate ";", "||", and "&&".
+ * Description: the spaces are inserted to separate ";", "||", and "&&".
  *              Replaces "#" with '\0'.
  */
-void handle_line(char **line, ssize_t read)
+void hndl_lne(char **lne, ssize_t rread)
 {
-	char *old_line, *new_line;
-	char previous, current, next;
+	char *o_lne, *n_lne;
+	char prev, curr, nxt;
 	size_t i, j;
-	ssize_t new_len;
+	ssize_t n_ln;
 
-	new_len = get_new_len(*line);
-	if (new_len == read - 1)
+	n_ln = g_n_ln(*lne);
+	if (n_ln == rread - 1)
 		return;
-	new_line = malloc(new_len + 1);
-	if (!new_line)
+	n_lne = malloc(nw_ln + 1);
+	if (!nw_lne)
 		return;
 	j = 0;
-	old_line = *line;
-	for (i = 0; old_line[i]; i++)
+	o_lne = *lne;
+	for (i = 0; o_lne[i]; i++)
 	{
-		current = old_line[i];
-		next = old_line[i + 1];
+		curr = o_lne[i];
+		nxt = o_lne[i + 1];
 		if (i != 0)
 		{
-			previous = old_line[i - 1];
-			if (current == ';')
+			prev = o_lne[i - 1];
+			if (curr == ';')
 			{
-				if (next == ';' && previous != ' ' && previous != ';')
+				if (nxt == ';' && prev != ' ' && prev != ';')
 				{
-					new_line[j++] = ' ';
-					new_line[j++] = ';';
+					n_lne[j++] = ' ';
+					n_lne[j++] = ';';
 					continue;
 				}
-				else if (previous == ';' && next != ' ')
+				else if (prev == ';' && nxt != ' ')
 				{
-					new_line[j++] = ';';
-					new_line[j++] = ' ';
+					n_lne[j++] = ';';
+					n_lne[j++] = ' ';
 					continue;
 				}
-				if (previous != ' ')
+				if (prev != ' ')
 					new_line[j++] = ' ';
 				new_line[j++] = ';';
 				if (next != ' ')
