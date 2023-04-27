@@ -61,7 +61,7 @@ void chg_lpnt(char **lpnt, size_t *n, char *buf, size_t bsize)
 {
 	if (*lpnt == NULL)
 	{
-		if (bize > 120)
+		if (bsize > 120)
 			*n = bsize;
 		else
 			*n = 120;
