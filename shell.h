@@ -28,7 +28,7 @@ typedef struct lst_s
 {
 	char *dir;
 	struct lst_s *nxt;
-} list_t;
+} lst_t;
 
 /**
  * struct alias_s - A new struct define alias.
@@ -89,10 +89,10 @@ int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 
 char *g_location(char *cmd);
-list_t *g_path_dir(char *path);
+lst_t *g_path_dir(char *path);
 void sg_hndl(int sg);
 int execute(char **ag, char **frnt);
-void fre_list(list_t *hd);
+void fre_lst(lst_t *hd);
 void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size);
 ssize_t _getline(char **lpnt, size_t *n, FILE *r_stream);
 void chg_lpnt(char **lpnt, size_t *n, char *buf, size_t bsize);
@@ -127,9 +127,9 @@ char *err_126(char **ag);
 char *err_127(char **ag);
 
 alias_t *add_aliasend(alias_t **hd, char *nme, char *val);
-void fre_alias_list(alias_t *hd);
-list_t *add_nodeend(list_t **hd, char *dir);
-void fre_list(list_t *hd);
+void fre_alias_lst(alias_t *hd);
+lst_t *add_nodeend(lst_t **hd, char *dir);
+void fre_lst(lst_t *hd);
 
 int cant_opn(char *f_path);
 int proc_fle_cmd(char *f_path, int *ex_retn);
