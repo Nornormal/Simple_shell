@@ -57,8 +57,8 @@ typedef struct builtin_s
 	char *nme;
 } builtin_t;
 
-void handle_line(char **lne, ssize_t rread);
-ssize_t g_n_len(char *lne);
+void handle_lne(char **lne, ssize_t rread);
+ssize_t g_n_ln(char *lne);
 void logic_op(char *lne, ssize_t *n_len);
 void var_replace(char **ag, int *ex_retn);
 char *g_ag(char *lne, int *ex_retn);
@@ -113,14 +113,14 @@ char **_cpenv(void);
 void fre_env(void);
 char **_getenv(const char *var);
 
-int create_error(char **ag, int err);
-char *error_env(char **ag);
-char *error_1(char **ag);
-char *error_2_exit(char **ag);
-char *error_2_cd(char **ag);
-char *error_2_syntax(char **ag);
-char *error_126(char **ag);
-char *error_127(char **ag);
+int cr_err(char **ag, int err);
+char *err_env(char **ag);
+char *err_1(char **ag);
+char *err_2_exit(char **ag);
+char *err_2_cd(char **ag);
+char *err_2_synt(char **ag);
+char *err_126(char **ag);
+char *err_127(char **ag);
 
 alias_t *add_alias_end(alias_t **hd, char *nme, char *val);
 void fre_alias_list(alias_t *hd);
@@ -128,5 +128,5 @@ list_t *add_node_end(list_t **hd, char *dir);
 void fre_list(list_t *hd);
 
 
-int proc_file_commands(char *f_path, int *ex_retn);
+int proc_file_cmd(char *f_path, int *ex_retn);
 #endif /* _SHELL_H_ */
