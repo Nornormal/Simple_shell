@@ -53,8 +53,8 @@ alias_t *alias;
  */
 typedef struct builtin_s
 {
-	int (*f)(char **av, char **frnt);
 	char *nme;
+	int (*f)(char **av, char **frnt);
 } builtin_t;
 
 void hndl_lne(char **lne, ssize_t rread);
