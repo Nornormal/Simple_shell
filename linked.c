@@ -94,7 +94,7 @@ void fre_alias_lst(alias_t *hd)
  * fre_lst - func frees a list.
  * @hd: hd of the list.
  */
-void free_lst(lst_t *hd)
+void fre_lst(lst_t *hd)
 {
 	lst_t *nxt;
 
