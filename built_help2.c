@@ -30,10 +30,10 @@ void hlp_setenv(void)
 }
 
 /**
- * help_unsetenv - function prints information on the built-in shell_cmd command
+ * hlp_unsetenv - function prints information on the built-in shell_cmd command
  * 'unsetenv'..
  */
-void help_unsetenv(void)
+void hlp_unsetenv(void)
 {
 	char *outp = "unsetenv: unsetenv [VARIABLE]\n\t Removes an ";
 
