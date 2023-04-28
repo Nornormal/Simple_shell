@@ -1,5 +1,10 @@
 #include "shell.h"
 
+void hlp_env(void);
+void hlp_setenv(void);
+void hlp_unsetenv(void);
+void hlp_history(void);
+
 /**
  * hlp_env - function prints information on the built-in shell_cmd command 'env'.
  */
