@@ -132,12 +132,12 @@ char *err_2_cd(char **ag)
 }
 
 /**
- * err_2_syntax - func to create an error message for syntax errors.
+ * err_2_synt - func to create an error message for syntax errors.
  * @ag: array of arguments passed to the command.
  *
  * Return: The error string.
  */
-char *err_2_syntax(char **ag)
+char *err_2_synt(char **ag)
 {
 	char *err, *hst_str;
 	int ln;
