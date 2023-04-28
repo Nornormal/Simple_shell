@@ -1,26 +1,20 @@
 #include "shell.h"
 
-int (*g_builtin(char *cmd))(char **ag, char **frnt);
-int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt);
-int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt);
-int shell_cmd_exit(char **ag, char **frnt);
-
 /**
- * g_builtin - function that matches a command with a corresponding
- *               shell_cmd built-in function.
+ * g_builtin - func matches a command with a corresponding function.
  * @cmd: command to match.
  *
- * Return: function pointer to the built-in corresponding.
+ * Return: func pntr to the built-in corresponding.
  */
 int (*g_builtin(char *cmd))(char **ag, char **frnt)
 {
 	builtin_t funcs[] = {
-		{ "exit", shell_cmd_exit },
 		{ "env", shell_cmd_env },
+		{ "exit", shell_cmd_exit },
 		{ "setenv", shell_cmd_setenv },
 		{ "unsetenv", shell_cmd_unsetenv },
-		{ "cd", shell_cmd_cd },
 		{ "alias", shell_cmd_alias },
+		{ "cd", shell_cmd_cd },
 		{ "help", shell_cmd_hlp },
 		{ NULL, NULL }
 	};
@@ -35,16 +29,13 @@ int (*g_builtin(char *cmd))(char **ag, char **frnt)
 }
 
 /**
- * shell_cmd_exit - function that cause normal process termination
- *                for the shell_cmd shell.
- * @ag: array of arguments contain the exit value.
+ * shell_cmd_exit - func cause normal process termination
+ * for the shell_cmd shell.
+ * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of ag.
  *
- * Return: -3 when there are no arguments.
- *         or -2 for invalid given exit value.
- *         or O/w if exits with the given status val.
- *
- * Description: when returning -3, program exits back to main function.
+ * Return: -3 : no arguments & exits back to main func.
+ *         -2 : invalid exit value.
  */
 int shell_cmd_exit(char **ag, char **frnt)
 {
@@ -80,13 +71,13 @@ int shell_cmd_exit(char **ag, char **frnt)
 }
 
 /**
- * shell_cmd_cd - func that change the current directory.
+ * shell_cmd_cd - func changes the current directory.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
  *
- * Return: -2 when the string is not a directory.
- *         -1 when an error occurs.
- *         else - 0.
+ * Return: -2 : string is not a directory.
+ *         -1 : error.
+ *          0 : sucess.
  */
 int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 {
@@ -161,12 +152,12 @@ int shell_cmd_cd(char **ag, char __attribute__((__unused__)) **frnt)
 }
 
 /**
- * shell_cmd_hlp - function prints information about built-in shell_cmd commands.
+ * shell_cmd_hlp - func prints information about commands.
  * @ag: array of arguments.
  * @frnt: pointer to the beginning of args.
  *
- * Return: -1 when error occurs.
- *         or - 0.
+ * Return: -1 : error.
+ *          0 :sucess.
  */
 int shell_cmd_hlp(char **ag, char __attribute__((__unused__)) **frnt)
 {
