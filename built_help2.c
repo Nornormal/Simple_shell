@@ -1,12 +1,7 @@
 #include "shell.h"
 
-void hlp_env(void);
-void hlp_setenv(void);
-void hlp_unsetenv(void);
-void hlp_history(void);
-
 /**
- * hlp_env - function prints information on the built-in shell_cmd command 'env'.
+ * hlp_env - function prints information on the 'env' command.
  */
 void hlp_env(void)
 {
@@ -16,7 +11,7 @@ void hlp_env(void)
 }
 
 /**
- * hlp_setenv - function prints information on the built-in shell_cmd command 'setenv'.
+ * hlp_setenv - function prints information on the 'setenv' command.
  */
 void hlp_setenv(void)
 {
@@ -30,8 +25,7 @@ void hlp_setenv(void)
 }
 
 /**
- * hlp_unsetenv - function prints information on the built-in shell_cmd command
- * 'unsetenv'..
+ * hlp_unsetenv - function prints information on the 'unsetenv' command.
  */
 void hlp_unsetenv(void)
 {
