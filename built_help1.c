@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * hlp_all - function prints all possible built-in shellby commands.
+ * hlp_all - function prints all possible built-in shell_cmd commands.
  */
 void hlp_all(void)
 {
