@@ -16,13 +16,9 @@ void fre_ag(char **ag, char **frnt)
 }
 
 /**
- * g_pid - func to get the current process ID.
- * Description: it opens the stat file, a space-delimited file containing
- *              information about the current process. The PID is the
- *              first word in the file. The function reads the PID into
- *              a buffer and replace the space at the end with a \0 byte.
+ * g_pid - func to get the PID.
  *
- * Return: current process ID or NULL on failure.
+ * Return: PID or NULL on failure.
  */
 char *g_pid(void)
 {
@@ -52,11 +48,11 @@ char *g_pid(void)
 }
 
 /**
- * g_env_val - it gets value corresponding to an env variable.
- * @begin: The env variable to search for.
- * @ln: length of the env variable to search for.
+ * g_env_val - gets value of env variable.
+ * @begin: env variable to search for.
+ * @ln: length of env variable.
  *
- * Return: empty string when the variable is not found.
+ * Return: empty string : variable is not found.
  *         or - value of the env variable.
  *
  * Description: Variables were stored in the format VARIABLE=VALUE.
