@@ -6,9 +6,7 @@
  * @o_size: size of the allocated space of @pnt.
  * @n_size: size of the new memory.
  *
- * Return: pointer if n_size == o_size.
- *         or NULL if n_size == 0 or pnt is not NULL.
- *         or a pointer to the reallocated memory block.
+ * Return: pointer or NULLL
  */
 void *_realloc(void *pnt, unsigned int o_size, unsigned int n_size)
 {
