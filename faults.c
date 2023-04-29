@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * nmb_ln - func to ount the digit length of a number.
+ * nmb_ln - func to count no of digit.
  * @nmb: number to measure.
  *
  * Return: length of the digit.
@@ -69,7 +69,7 @@ char *_itoa(int nmb)
 
 
 /**
- * cr_err - func to write a custom error message to stderr.
+ * cr_err - func to write a custom error to stdout.
  * @ag: array of arguments.
  * @n_err: error value.
  *
