@@ -4,7 +4,6 @@
  * _cpenv - func to create a copy of the environment.
  *
  * Return: NULL when error occurs.
- *         or O/w - pointer to pointer to the new copy.
  */
 char **_cpenv(void)
 {
@@ -50,11 +49,10 @@ void fre_env(void)
 }
 
 /**
- * _getenv - func to get an env variable from the PATH.
+ * _getenv - func to get an env variable from PATH.
  * @var: The name of the envl variable to get.
  *
  * Return: NULL when the env variable does not exist.
- *         or - pointer to the env variable.
  */
 char **_getenv(const char *var)
 {
