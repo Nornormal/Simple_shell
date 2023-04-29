@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * err_env - func to creates an error message for shell_cmd_env errors.
+ * err_env - error message for shell_cmd_env.
  * @ag: array of arguments passed to the command.
  *
  * Return: the string error.
@@ -36,7 +36,7 @@ char *err_env(char **ag)
 }
 
 /**
- * err_1 - func to create an error message for shell_cmd_alias errors.
+ * err_1 - error message for shell_cmd_alias.
  * @ag: array of arguments passed to the command.
  *
  * Return: The string error.
@@ -59,7 +59,7 @@ char *err_1(char **ag)
 }
 
 /**
- * err_2_exit - func to create an error message for shell_cmd_exit errors.
+ * err_2_exit - error message for shell_cmd_exit.
  * @ag: array of arguments passed to the command.
  *
  * Return: The string error.
@@ -93,7 +93,7 @@ char *err_2_exit(char **ag)
 }
 
 /**
- * err_2_cd - func to create an error message for shell_cmd_cd errors.
+ * err_2_cd - error message for shell_cmd_cd.
  * @ag: array of arguments passed to the command.
  *
  * Return: The string error.
@@ -132,7 +132,7 @@ char *err_2_cd(char **ag)
 }
 
 /**
- * err_2_synt - func to create an error message for syntax errors.
+ * err_2_synt - error message for syntax.
  * @ag: array of arguments passed to the command.
  *
  * Return: The error string.
