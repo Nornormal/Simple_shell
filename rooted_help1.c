@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * hlp_all - function prints all possible built-in shell_cmd commands.
+ * hlp_all - func prints all possible built-in shell_cmd commands.
  */
 void hlp_all(void)
 {
@@ -24,7 +24,7 @@ void hlp_all(void)
 }
 
 /**
- * hlp_alias - function prints information on the built-in shell_cmd command 'alias'.
+ * hlp_alias - func prints info on the command 'alias'.
  */
 void hlp_alias(void)
 {
@@ -66,7 +66,7 @@ void hlp_cd(void)
 }
 
 /**
- * hlp_exit - function prints information on the built-in shell_cmd command 'exit'.
+ * hlp_exit - func prints info on the command 'exit'.
  */
 void hlp_exit(void)
 {
@@ -82,7 +82,7 @@ void hlp_exit(void)
 }
 
 /**
- * hlp_help - function prints information on the built-in shell_cmd command 'help'.
+ * hlp_help - func prints info on the command 'help'.
  */
 void hlp_help(void)
 {
