@@ -43,8 +43,7 @@ char *_strcat(char *dest, const char *src)
 }
 
 /**
- * _strncat - Concantenates two strings where n number
- *            of byte from source.
+ * _strncat - Concantenates two strings, n number of byte.
  * @dest: a pointer to destination string.
  * @src: a pointer to source string.
  * @n: no of byte to copy from src.
