@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * g_location - func locate a command PATH.
- * @cmd: command to locate.
+ * g_location - func locate a cmd PATH.
+ * @cmd: cmd to locate.
  *
- * Return: NULL- if error occur or command cannot found.
+ * Return: NULL : error or cmd can't found.
  *         Or - pathname of the command.
  */
 char *g_location(char *cmd)
@@ -46,12 +46,11 @@ char *g_location(char *cmd)
 }
 
 /**
- * fill_path_dir - func Copy path + also replaces colons (:) with
- * 	current working directory.
- * @path: The colon-separated list of directories.
+ * fill_path_dir - func Copy path & replaces colons (:) with
+ * current working directory.
+ * @path: colon-separated list of directories.
  *
- * Return: A copy of path with any leading/sandwiched/trailing colons replaced
- *	   with the current working directory.
+ * Return: @path_cpy
  */
 char *fill_path_dir(char *path)
 {
@@ -102,9 +101,9 @@ char *fill_path_dir(char *path)
 
 /**
  * g_path_dir - func tokenize a colon-separates list of directories
- * @path: The colon-separated list of directories.
+ * @path: colon-separated list of directories.
  *
- * Return: pointer to the first linked list.
+ * Return: pointer to the linked-list head.
  */
 lst_t *g_path_dir(char *path)
 {
