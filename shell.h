@@ -20,7 +20,7 @@ char *nme;
 int hst;
 
 /**
- * struct lst_s - new struct define a linked list.
+ * struct lst_s - new struct define linked-list.
  * @dir: current directory path.
  * @nxt: pointer to next struct lst_s.
  */
@@ -31,9 +31,9 @@ typedef struct lst_s
 } lst_t;
 
 /**
- * struct alias_s - A new struct define alias.
- * @nme: The name of the alias.
- * @val: The value of the alias.
+ * struct alias_s - new struct define alias.
+ * @nme: alias name.
+ * @val: alias value.
  * @nxt: pointer to next struct alias_s.
  */
 typedef struct alias_s
@@ -47,9 +47,9 @@ alias_t *alias;
 
 
 /**
- * struct builtin_s - new struct define built-in commands.
- * @nme: name of the built-in command.
- * @f: function pointer to the built-in command's function.
+ * struct builtin_s - new struct define commands.
+ * @nme: command name.
+ * @f: function pointer to the command's function.
  */
 typedef struct builtin_s
 {
