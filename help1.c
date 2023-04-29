@@ -53,7 +53,7 @@ char *g_pid(void)
  * @ln: length of env variable.
  *
  * Return: empty string : variable is not found.
- *         or value of the env variable.
+ *         or value of env variable.
  */
 char *g_env_val(char *begin, int ln)
 {
@@ -83,14 +83,10 @@ char *g_env_val(char *begin, int ln)
 }
 
 /**
- * var_replace - it handles variable replacement.
- * @lne: pointer to pointer containing command and arguments.
- * @ex_retn: pointer to the return value of last executed command.
- *
- * Description: Replaces $$ with the current Porcess ID, $? with the return value
- *              of the last executed program, and envr variables
- *              preceded by $ with their corresponding value.
- */
+ * var_replace - handle variable replacement.
+ * @lne: pointer to pointer containing command & arguments.
+ * @ex_retn: pointer to return value of last exec command.
+  */
 void var_replace(char **lne, int *ex_retn)
 {
 	int a, b = 0, ln;
