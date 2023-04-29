@@ -1,12 +1,10 @@
 #include "shell.h"
 
 /**
- * hndl_lne - func to partitions a line read from a standard input as needed.
- * @lne: pointer to a line read from standard input.
- * @rread: length of line.
+ * hndl_lne - func to partitions a line read from a STD input.
+ * @lne: pointer to a line read from STD input.
+ * @rread: line length.
  *
- * Description: the spaces are inserted to separate ";", "||", and "&&".
- *              Replaces "#" with '\0'.
  */
 void hndl_lne(char **lne, ssize_t rread)
 {
