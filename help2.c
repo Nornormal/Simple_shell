@@ -1,10 +1,9 @@
 #include "shell.h"
 
 /**
- * hndl_lne - func to partitions a line read from a STD input.
+ * hndl_lne - func partitions a line read from a STD input.
  * @lne: pointer to a line read from STD input.
  * @rread: line length.
- *
  */
 void hndl_lne(char **lne, ssize_t rread)
 {
@@ -90,13 +89,11 @@ void hndl_lne(char **lne, ssize_t rread)
 }
 
 /**
- * g_n_ln - func to get new length of a line partitioned
- *               by ";", "||", "&&&", or "#".
+ * g_n_ln - func gets new length of a line partitioned
+ * by ";", "||", "&&&", or "#".
  * @lne: line to be checked.
  *
- * Return: new length of the line.
- *
- * Description: Cuts short lines containing '#' comments with '\0'.
+ * Return: the new line length.
  */
 
 ssize_t g_n_ln(char *lne)
@@ -151,8 +148,8 @@ ssize_t g_n_ln(char *lne)
 	return (n_ln);
 }
 /**
- * logic_op - func to check a line for logical operators "||" or "&&".
- * @lne: pointer to the character to be checked in the line.
+ * logic_op - func check a line for logical ops "||" or "&&".
+ * @lne: pointer to character to be checked in the line.
  * @n_ln: Pointer to new_len in @g_n_ln function.
  */
 void logic_op(char *lne, ssize_t *n_ln)
