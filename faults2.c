@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * err_126 - func to create an error message for permission denied failures.
+ * err_126 - error message for permission denied failures.
  * @ag: An array of arguments passed to the command.
  *
  * Return: The string error.
@@ -35,7 +35,7 @@ char *err_126(char **ag)
 }
 
 /**
- * err_127 - func to create an error message for command not found failures.
+ * err_127 - error message for command not found failures.
  * @ag: array of arguments passed to the command.
  *
  * Return: The string error.
