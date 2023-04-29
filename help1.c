@@ -2,7 +2,7 @@
 
 /**
  * fre_ag - func to free up memory.
- * @ag: null-terminated pointer to  pointer containing commands/arguments.
+ * @ag: pointer to pointer containing commands/arguments.
  * @frnt: pointer to pointer to the beginning of args.
  */
 void fre_ag(char **ag, char **frnt)
@@ -53,9 +53,7 @@ char *g_pid(void)
  * @ln: length of env variable.
  *
  * Return: empty string : variable is not found.
- *         or - value of the env variable.
- *
- * Description: Variables were stored in the format VARIABLE=VALUE.
+ *         or value of the env variable.
  */
 char *g_env_val(char *begin, int ln)
 {
