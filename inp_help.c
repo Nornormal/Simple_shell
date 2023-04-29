@@ -5,8 +5,8 @@
  * @lne: buff to store command.
  * @ex_retn: return value of the last command.
  *
- * Return: NULL - If an error occur.
- *         or - a pointer to stored command.
+ * Return: NULL : error.
+ *         or pointer to stored command.
  */
 char *g_ag(char *lne, int *ex_retn)
 {
@@ -36,12 +36,12 @@ char *g_ag(char *lne, int *ex_retn)
 }
 
 /**
- * call_ag - func partitions operators from commands.
+ * call_ag - func partitions ops from commands.
  * @ag: array of argument.
- * @frnt: a pointer to pointer to the beginning of args.
+ * @frnt: pointer to pointer to the beginning of args.
  * @ex_retn: return value of last command.
  *
- * Return: return value of the last command.
+ * Return: @retn value of the last command.
  */
 int call_ag(char **ag, char **frnt, int *ex_retn)
 {
@@ -97,7 +97,7 @@ int call_ag(char **ag, char **frnt, int *ex_retn)
  * run_ag - func to call the execution of a command.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
- * @ex_retn: return value of the parent process' last executed command.
+ * @ex_retn: @retn value of the parent process' last exec cmd.
  *
  * Return: The return value of the last executed command.
  */
@@ -128,12 +128,11 @@ int run_ag(char **ag, char **frnt, int *ex_retn)
 }
 
 /**
- * hndl_ag - func to get, call and run the execution of a command.
- * @ex_retn: The return value of the parent process' last executed command.
+ * hndl_ag - func to get, call and run the execution of a cmd.
+ * @ex_retn: @retn value of the parent process' last exec cmd.
  *
- * Return: END_OF_FILE (-2) when end-of-file is read.
- *         -1 when the input cannot be tokenized.
- *         or O/w - exit value of the last executed command.
+ * Return: -2 : EOF is read.
+ *         -1 : input can't be tokenized.
  */
 int hndl_ag(int *ex_retn)
 {
@@ -175,10 +174,10 @@ int hndl_ag(int *ex_retn)
 }
 
 /**
- * check_ag - fun to check if there are any leading ';', ';;', '&&', or '||'.
- * @ag: 2D pointer to tokenized commands and arguments.
+ * check_ag - fun check for leading ';', ';;', '&&', or '||'.
+ * @ag: pntr to pntr to tokenized commands & arguments.
  *
- * Return: 2- when a ';', '&&', or '||' is placed at an invalid position.
+ * Return: 2- : invalid position of ; , && , ||.
  *	   or - 0.
  */
 int check_ag(char **ag)
