@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * cant_opn - func to print a "cant open" error, if
- * the file doesn't exist or lacks proper permissions.
+ * cant_opn - func print "cant open" error, if file
+ * doesn't exist or lacks proper permissions.
  * @f_path: Path to the supposed file.
  *
  * Return: 127.
@@ -39,14 +39,13 @@ int cant_opn(char *f_path)
 }
 
 /**
- * proc_fle_cmd - func to take a file and attempt to run the commands stored
- * within.
- * @f_path: Path to the file.
- * @ex_retn: the return value of the last executed command.
+ * proc_fle_cmd - func take a file & attempt to run the cmds within.
+ * @f_path: file path.
+ * @ex_retn: return value of the last executed cmd.
  *
- * Return: 127 when file couldn't be opened.
- *	   or -1 when malloc fails.
- *	   or the return value of the last command ran.
+ * Return: 127 : file couldn't be opened.
+ *	   -1 : malloc fails.
+ *	   return value of the last command ran.
  */
 int proc_fle_cmd(char *f_path, int *ex_retn)
 {
