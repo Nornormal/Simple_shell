@@ -18,8 +18,8 @@ void sg_hndl(int sg)
  * @ag: array of arguments.
  * @frnt: pointer to pointer the beginning of args.
  *
- * Return: error occur - a corresponding error code.
- *         O/w - exit value of the last command.
+ * Return: O/w - exit value of the last command.
+ * or error occur - a corresponding error code.
  */
 int execute(char **ag, char **frnt)
 {
@@ -72,9 +72,9 @@ int execute(char **ag, char **frnt)
 }
 
 /**
- * main - func display simple UNIX command.
- * @ag: number of arguments supplied to the program.
- * @ag: array of pointers to the arguments.
+ * main - func print UNIX command.
+ * @ac: number of arguments.
+ * @av: array of pointers to the arguments.
  *
  * Return: value of executed command.
  */
