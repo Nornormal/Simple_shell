@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
- * _strchr - func to locate a character in a string.
+ * _strchr - func to find a character in a string.
  * @s: string to be searche.
  * @c: character to be locate.
  *
- * Return: If c is found - a pointer to the first occur.
- *         If not found - NULL.
+ * Return: a pointer or NULL
  */
 char *_strchr(char *s, char c)
 {
@@ -27,9 +26,7 @@ char *_strchr(char *s, char c)
  * @s1: first string to compare.
  * @s2: second string to compare.
  *
- * Return: +ve byte difference if s1 > s2
- *         0 if s1 = s2
- *         -ve byte difference if s1 < s2
+ * Return: +ve byte or 0 or -ve byte.
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -50,9 +47,7 @@ int _strcmp(char *s1, char *s2)
  * @s2: a pointer to a string.
  * @n: first n byte of the string to compare.
  *
- * Return: less than 0 if s1 is shorter than s2.
- *         0 if s1 and s2 match.
- *         greater than 0 if s1 is longer than s2.
+ * Return: less 0 or 0 or greater than 0
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
