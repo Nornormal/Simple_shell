@@ -48,7 +48,7 @@ int cnt_tok(char *str, char *delim)
 
 /**
  * _strtok - fun tokenize a string.
- * @line: string.
+ * @lne: string.
  * @delim: delimiter char to tokenize the string by.
  *
  * Return: pointer to the tokenized words.
