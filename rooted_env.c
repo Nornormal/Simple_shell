@@ -5,11 +5,8 @@
  * @ag: array of arguments passed to shell.
  * @frnt: pointer to pointer to beginning of args.
  *
- * Return: -1 when error occurs.
- *	   or - 0.
- *
- * Description: to print one variable only per line in the
- *              format 'variable'='value'.
+ * Return: -1 : error.
+ *	    0 : success.
  */
 int shell_cmd_env(char **ag, char __attribute__((__unused__)) **frnt)
 {
@@ -30,14 +27,12 @@ int shell_cmd_env(char **ag, char __attribute__((__unused__)) **frnt)
 }
 
 /**
- * shell_cmd_setenv - func to change or add an envir. variable to the PATH.
- * @ag: array of arguments passed to the shell.
+ * shell_cmd_setenv - func change or add env variable to the PATH.
+ * @ag: array of arguments.
  * @frnt: pointer to pointer to beginning of args.
- * Description: ag[1] name of the new or existing PATH variable.
- *              ag[2] value to set the new or changed variable to.
  *
- * Return: -1 when error occurs.
- *         or - 0.
+ * Return: -1 : error.
+ *          0 : success.
  */
 int shell_cmd_setenv(char **ag, char __attribute__((__unused__)) **frnt)
 {
@@ -84,13 +79,12 @@ int shell_cmd_setenv(char **ag, char __attribute__((__unused__)) **frnt)
 }
 
 /**
- * shell_cmd_unsetenv - func to delete an env. variable from the PATH.
- * @ag: array of arguments passed to the shell.
+ * shell_cmd_unsetenv - func delete env variables from the PATH.
+ * @ag: array of arguments.
  * @frnt: pointer to pointer to  beginning of args.
- * Description: ag[1] is the PATH variable to remove.
  *
- * Return: -1 when error occurs.
- *         or - 0.
+ * Return: -1 : error.
+ *          0 : success.
  */
 int shell_cmd_unsetenv(char **ag, char __attribute__((__unused__)) **frnt)
 {
