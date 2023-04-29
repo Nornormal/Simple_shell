@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * shell_cmd_alias - is a built-in command that prints either all alias, specific
- * alias, or sets an alias.
+ * shell_cmd_alias - built-in command that prints either all alias,
+ * specific alias or sets an alias.
  * @ag: array of arguments.
  * @frnt: pointer to pointer to the beginning of args.
  *
- * Return: -1 when error occurs.
- *         or - 0.
+ * Return: -1 : error.
+ *          0 : success.
  */
 int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt)
 {
@@ -49,8 +49,8 @@ int shell_cmd_alias(char **ag, char __attribute__((__unused__)) **frnt)
 }
 
 /**
- * st_alias - function that either set an existing alias 'name' with new value,
- * 'value' or creates new alias with 'name' and 'value'.
+ * st_alias - func that either set an existing alias 'nme' with new
+ * 'val' or creates new alias with 'nme' and 'val'.
  * @var_nme: alias name.
  * @val: alias value. First character is a '='.
  */
@@ -87,7 +87,7 @@ void st_alias(char *var_nme, char *val)
 }
 
 /**
- * pr_alias - function that print the alias in the format name='value'.
+ * pr_alias - func prints alias in the format name = 'val'.
  * @alias: Pointer to alias.
  */
 void pr_alias(alias_t *alias)
@@ -107,11 +107,10 @@ void pr_alias(alias_t *alias)
 	free(alias_str);
 }
 /**
- * rep_alias - func that goes through the arguments and replace any matching alias
- * with their value.
+ * rep_alias - func replaces any matching alias with their value.
  * @ag: pointer to pointer to the arguments.
  *
- * Return: pointer to pointer to the arguments.
+ * Return: @ag.
  */
 char **rep_alias(char **ag)
 {
