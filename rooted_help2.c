@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * hlp_env - function prints information on the 'env' command.
+ * hlp_env - func prints info on the 'env' command.
  */
 void hlp_env(void)
 {
@@ -11,7 +11,7 @@ void hlp_env(void)
 }
 
 /**
- * hlp_setenv - function prints information on the 'setenv' command.
+ * hlp_setenv - func prints info on the 'setenv' command.
  */
 void hlp_setenv(void)
 {
@@ -25,7 +25,7 @@ void hlp_setenv(void)
 }
 
 /**
- * hlp_unsetenv - function prints information on the 'unsetenv' command.
+ * hlp_unsetenv - func prints info on the 'unsetenv' command.
  */
 void hlp_unsetenv(void)
 {
