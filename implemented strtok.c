@@ -5,7 +5,7 @@
  * @str: string to be searched.
  * @delim: delimiter character.
  *
- * Return: delimiter index marking the end of str.
+ * Return: delimiter index the end of str.
  */
 int tok_ln(char *str, char *delim)
 {
@@ -51,7 +51,7 @@ int cnt_tok(char *str, char *delim)
  * @line: string.
  * @delim: delimiter char to tokenize the string by.
  *
- * Return: pointer to an array of the tokenized words.
+ * Return: pointer to the tokenized words.
  */
 char **_strtok(char *lne, char *delim)
 {
