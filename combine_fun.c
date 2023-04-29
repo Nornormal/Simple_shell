@@ -6,8 +6,7 @@
  * @nme: name of the new alias.
  * @val: value of the new alias.
  *
- * Return: NULL - if error occur.
- *         Or - a pointer to the new node.
+ * Return: NULL - or pointer
  */
 alias_t *add_aliasend(alias_t **hd, char *nme, char *val)
 {
@@ -45,8 +44,7 @@ alias_t *add_aliasend(alias_t **hd, char *nme, char *val)
  * @hd: pointer to the head of list.
  * @dir: directory path for the new node to contain.
  *
- * Return: NULL - if error occur.
- *         Or pointer to the new node.
+ * Return: NULL - or pointer
  */
 lst_t *add_nodeend(lst_t **hd, char *dir)
 {
